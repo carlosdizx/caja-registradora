@@ -14,7 +14,7 @@
 				<v-form @submit.prevent="submit">
 					<validation-provider v-slot="{ errors }" name="email" rules="required|email">
 						<v-text-field
-							v-model="userTemplate.email"
+							v-model="email"
 							:error-messages="errors"
 							label="Correo electronico"
 							prepend-icon="mdi-account-circle"
@@ -28,7 +28,7 @@
 						rules="required|min:8|max:60"
 					>
 						<v-text-field
-							v-model="userTemplate.password"
+							v-model="password"
 							type="password"
 							label="Contraseña"
 							:error-messages="errors"
@@ -44,7 +44,7 @@
 				</v-form>
 				<router-link class="mr-5" to="/dashboard" v-slot="{ navigate }" custom>
 					<v-btn
-						@click="navigate"
+						@click="procesarFormulario"
 						@keypress.enter="navigate"
 						role="link"
 						color="info"
@@ -63,7 +63,7 @@
 	</v-card>
 </template>
 
-<script lang="ts">
+<script>
 	import { required, digits, email, max, min } from 'vee-validate/dist/rules';
 	import {
 		extend,
@@ -71,6 +71,7 @@
 		ValidationProvider,
 		setInteractionMode,
 	} from 'vee-validate';
+	import { mapActions } from 'vuex';
 
 	setInteractionMode('eager');
 
@@ -106,15 +107,21 @@
 		},
 		name: 'Login',
 		data: () => ({
-			userTemplate: {
-				email: '',
-				password: '',
-			},
+			email: '',
+			password: '',
+
 			showPassword: false,
 		}),
 		methods: {
 			submit() {
 				this.$refs.observer.validate();
+			},
+			...mapActions(['registrarUsuario', 'loguearUsuario']),
+			async procesarFormulario() {
+				await this.loguearUsuario({
+					email: this.email,
+					password: this.password,
+				});
 			},
 		},
 	};
