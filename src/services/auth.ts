@@ -30,7 +30,6 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 
 export const LOGIN_USUARIO = async (usuario: { email: string; password: string }) => {
 	try {
-		console.log(`${store.state.urlSingIn}${store.state.key}`)
 		const res = await (
 			await fetch(`${store.state.urlSingIn}${store.state.key}`, {
 				method: 'POST',
@@ -41,7 +40,6 @@ export const LOGIN_USUARIO = async (usuario: { email: string; password: string }
 				}),
 			})
 		).json();
-		console.log(res);
 		if (res.error) {
 			console.log(res.error);
 			//return commit('setError', userDB.error.message);

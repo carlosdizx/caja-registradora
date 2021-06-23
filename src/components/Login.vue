@@ -42,18 +42,14 @@
 						</v-text-field>
 					</validation-provider>
 				</v-form>
-				<router-link class="mr-5" to="/dashboard" v-slot="{ navigate }" custom>
-					<v-btn
-						@click="procesarFormulario"
-						@keypress.enter="navigate"
-						role="link"
-						color="info"
-						type="submit"
-						:disabled="invalid"
-						>Iniciar sesion</v-btn
-					>
-				</router-link>
-				<router-link to="/forms" v-slot="{ navigate }" custom>
+				<v-btn
+					@click="procesarFormulario"
+					color="info"
+					type="submit"
+					:disabled="invalid"
+					>Iniciar sesion</v-btn
+				>
+				<router-link to="/registroLogin" v-slot="{ navigate }" custom>
 					<v-btn @click="navigate" @keypress.enter="navigate" role="link" color="success"
 						>Registrarme</v-btn
 					>
@@ -109,7 +105,6 @@
 		data: () => ({
 			email: '',
 			password: '',
-
 			showPassword: false,
 		}),
 		methods: {
