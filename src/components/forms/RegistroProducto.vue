@@ -5,10 +5,27 @@
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
-				<v-text-field prepend-icon="mdi-food-variant" label="Nombre" />
-				<v-text-field prepend-icon="mdi-cash" type="number" label="Precio compra" />
-				<v-text-field prepend-icon="mdi-cash-plus" type="number" label="Precio venta" />
+				<v-text-field
+					v-model="productoTemplate.nombre"
+					prepend-icon="mdi-food-variant"
+					label="Nombre"
+				/>
+				<v-text-field
+					v-model.number="productoTemplate.precioCompra"
+					prepend-icon="mdi-cash"
+          @keypress="esNumero($event)"
+					type="number"
+					label="Precio compra"
+				/>
+				<v-text-field
+					v-model.number="productoTemplate.precioVenta"
+					prepend-icon="mdi-cash-plus"
+          @keypress="esNumero($event)"
+					type="number"
+					label="Precio venta"
+				/>
 				<v-select
+					v-model="productoTemplate.tipo"
 					prepend-icon="mdi-format-list-bulleted-type"
 					:items="tipos"
 					label="Categoria"
@@ -16,7 +33,7 @@
 			</v-form>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn color="success">Agregar</v-btn>
+			<v-btn @click="submit" color="success">Agregar</v-btn>
 		</v-card-actions>
 	</v-card>
 </template>
@@ -31,6 +48,7 @@
 	} from 'vee-validate';
 	import { mapActions, mapState } from 'vuex';
 	import { TIPOS } from '../../const/tipoProductos';
+  import {ES_NUMERO} from "../../const/funciones";
 	setInteractionMode('eager');
 
 	extend('digits', {
@@ -65,9 +83,26 @@
 		},
 		data: () => ({
 			tipos: TIPOS,
+			productoTemplate: {
+				nombre: '',
+				precioCompra: null,
+				precioVenta: null,
+				tipo: '',
+			},
 		}),
 		methods: {
-			submit() {},
+			submit() {
+				console.log(this.productoTemplate);
+				this.productoTemplate = {
+					nombre: '',
+					precioCompra: null,
+					precioVenta: null,
+					tipo: '',
+				};
+			},
+      esNumero(evt) {
+        ES_NUMERO(evt);
+      }
 		},
 	};
 </script>
