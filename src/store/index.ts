@@ -53,8 +53,10 @@ export default new Vuex.Store({
 	actions: {
 		async cerrarSesion({ commit }) {
 			commit('setUsuario', null);
-			await router.push('/');
-			localStorage.removeItem('usuario');
+			setTimeout(function() {
+				router.push('/');
+				localStorage.removeItem('usuario');
+			}, 1000);
 		},
 		registrarUsuario({ commit }, usuario) {
 			REGISTRAR_USUARIO(usuario)

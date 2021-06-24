@@ -60,7 +60,6 @@ export const CARGAR_USUARIO = async () => {
 		return store.dispatch('setUsuario', null);
 	}
 	try {
-		console.log(usuarioLocal.refreshToken);
 		const res = await (
 			await fetch(`${store.state.urlSingInToken}${store.state.key}`, {
 				method: 'POST',
@@ -70,24 +69,14 @@ export const CARGAR_USUARIO = async () => {
 				}),
 			})
 		).json();
-		console.log('----->');
+		if (res.error) {
+			console.log(res.error);
+			alert('Vuelva a iniciar sesion!');
+			return await store.dispatch('setUsuario', null);
+		}
+		await router.push('/inicio');
 		console.log(res);
 	} catch (error) {
 		console.log(error);
 	}
-	/*
-	try {
-		const res = await fetch(
-			`https://udemy-api-arena-default-rtdb.firebaseio.com/tareas/${store.state.usuario.localId}.json?auth=${store.state.usuario.idToken}`
-		);
-		const dataDB = await res.json();
-		const arrayTareas = [];
-		for (let id in dataDB) {
-			arrayTareas.push(dataDB[id]);
-		}
-		commit('cargar', arrayTareas);
-	} catch (error) {
-		console.log(error);
-	}
-	*/
 };
