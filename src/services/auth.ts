@@ -46,8 +46,7 @@ export const LOGIN_USUARIO = async (usuario: { email: string; password: string }
 		await store.dispatch('setError', null);
 		await store.dispatch('setUsuario', res);
 		localStorage.setItem('usuario', JSON.stringify(res));
-		await router.push('/');
-		localStorage.setItem('usuario', JSON.stringify(res));
+		await router.push('/inicio')
 	} catch (error) {
 		console.log(error);
 	}

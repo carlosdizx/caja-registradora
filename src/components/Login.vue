@@ -51,9 +51,9 @@
 					</v-btn>
 				</router-link>
 			</validation-observer>
-      <v-alert v-if="error.tipo !== ''" dense outlined type="error">
-        {{ error.message }}
-      </v-alert>
+			<v-alert v-if="error.tipo !== ''" dense outlined type="error">
+				{{ error.message }}
+			</v-alert>
 		</v-card-text>
 	</v-card>
 </template>
