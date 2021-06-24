@@ -5,7 +5,7 @@
 <script>
 	import ToolBarIcons from '../components/general/ToolBarIcons';
 	export default {
-		name: 'Test',
+		name: 'RegistroVPP',
 		components: { ToolBarIcons },
 		data: () => ({
 			tabs: [''],

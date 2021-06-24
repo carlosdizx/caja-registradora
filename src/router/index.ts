@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
 	{
 		path: '/inicio',
 		name: 'Inicio',
-		component: () => import('../views/Inicio.vue'),
+		component: () => import('../views/RegistroVPP.vue'),
 	},
 ];
 
