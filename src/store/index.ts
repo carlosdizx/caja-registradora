@@ -21,28 +21,34 @@ export default new Vuex.Store({
 			if (payload === null) {
 				return (state.error = { tipo: '', message: '' });
 			}
-			if (payload === 'EMAIL_NOT_FOUND') {
+			else if (payload === 'EMAIL_NOT_FOUND') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'Email no registrado',
 				});
 			}
-			if (payload === 'INVALID_PASSWORD') {
+			else if (payload === 'INVALID_PASSWORD') {
 				return (state.error = {
 					tipo: 'password',
 					message: 'Contraseña incorrecta',
 				});
 			}
-			if (payload === 'EMAIL_EXISTS') {
+			else if (payload === 'EMAIL_EXISTS') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'El correo ya esta registrado',
 				});
 			}
-			if (payload === 'INVALID_EMAIL') {
+			else if (payload === 'INVALID_EMAIL') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'El correo no esta bien escrito',
+				});
+			}
+			else if (payload === 'USER_DISABLED') {
+				return (state.error = {
+					tipo: 'email',
+					message: 'El usuario esta baneado',
 				});
 			}
 		},

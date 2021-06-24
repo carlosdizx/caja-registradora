@@ -67,7 +67,6 @@
 		setInteractionMode,
 	} from 'vee-validate';
 	import { mapActions, mapState } from 'vuex';
-
 	setInteractionMode('eager');
 
 	extend('digits', {
