@@ -1,7 +1,13 @@
 <template>
 	<v-card>
 		<v-toolbar :color="color" dark flat>
-			<!--<v-app-bar-nav-icon></v-app-bar-nav-icon>-->
+			<v-app-bar-nav-icon>
+				<router-link to="/" v-slot="{ navigate }" custom>
+					<v-btn @click="navigate" role="link" icon>
+						<v-icon>mdi-arrow-left</v-icon>
+					</v-btn>
+				</router-link>
+			</v-app-bar-nav-icon>
 			<v-toolbar-title>{{ titulo }}</v-toolbar-title>
 			<v-spacer></v-spacer>
 			<template v-slot:extension>
@@ -31,5 +37,3 @@
 		},
 	};
 </script>
-
-<style scoped></style>

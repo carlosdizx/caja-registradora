@@ -1,7 +1,7 @@
 <template>
   <div>
     <ToolBar titulo="Inicio" color="indigo" :tabs="tabs" />
-    <h1>Hola amigos como estan!</h1>
+    <h1>Ey pero que pasa chavales!</h1>
   </div>
 </template>
 

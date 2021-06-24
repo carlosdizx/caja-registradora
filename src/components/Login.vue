@@ -118,7 +118,10 @@
 				});
 			},
 		},
-		computed: {
+    created() {
+
+    },
+    computed: {
 			...mapState(['error']),
 		},
 	};
