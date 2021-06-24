@@ -15,7 +15,7 @@
 					<v-tabs-slider color="yellow"></v-tabs-slider>
 					<router-link
 						v-for="item in tabs"
-						:key="item"
+						:key="item.name"
 						:to="item.link"
 						v-slot="{ navigate }"
 						custom

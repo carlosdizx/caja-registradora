@@ -19,6 +19,11 @@ const routes: Array<RouteConfig> = [
 		name: 'RegistroVPP',
 		component: () => import('../views/RegistroVPP.vue'),
 	},
+	{
+		path: '/inicio',
+		name: 'Inicio',
+		component: () => import('../views/Inicio.vue'),
+	},
 ];
 
 const router = new VueRouter({
