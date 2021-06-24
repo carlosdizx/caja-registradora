@@ -2,7 +2,7 @@
 	<v-layout align-center>
 		<v-card class="mx-auto" width="1000" max-width="1000">
 			<v-card-title class="mx-5" color="indigo">
-        Registro de usuario
+				Registro de usuario
 			</v-card-title>
 			<v-card-text>
 				<validation-observer ref="observer" v-slot="{ invalid }">
@@ -17,46 +17,48 @@
 							>
 							</v-text-field>
 						</validation-provider>
-            <validation-provider
-                v-slot="{ errors }"
-                name="Contraseña"
-                rules="required|min:8|max:60"
-            >
-              <v-text-field
-                  v-model="password"
-                  type="password"
-                  label="Contraseña"
-                  :error-messages="errors"
-                  name="input-10-1"
-                  counter
-                  prepend-icon="mdi-lock"
-                  :type="showPassword ? 'text' : 'password'"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="showPassword = !showPassword"
-              >
-              </v-text-field>
-            </validation-provider>
-            <validation-provider
-                v-slot="{ errors }"
-                name="Contraseña"
-                rules="required|min:8|max:60"
-            >
-              <v-text-field
-                  v-model="password"
-                  type="text"
-                  label="Contraseña"
-                  :error-messages="errors"
-                  name="input-10-1"
-                  counter
-                  disabled
-                  prepend-icon="mdi-lock"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="showPassword = !showPassword"
-              >
-              </v-text-field>
-            </validation-provider>
-          </v-form>
-					<v-btn @click="procesarFormulario" color="success">Registrarme</v-btn>
+						<validation-provider
+							v-slot="{ errors }"
+							name="Contraseña"
+							rules="required|min:8|max:60"
+						>
+							<v-text-field
+								v-model="password"
+								type="password"
+								label="Contraseña"
+								:error-messages="errors"
+								name="input-10-1"
+								counter
+								prepend-icon="mdi-lock"
+								:type="showPassword ? 'text' : 'password'"
+								:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+								@click:append="showPassword = !showPassword"
+							>
+							</v-text-field>
+						</validation-provider>
+						<validation-provider
+							v-slot="{ errors }"
+							name="Contraseña"
+							rules="required|min:8|max:60"
+						>
+							<v-text-field
+								v-model="password"
+								type="text"
+								label="Contraseña"
+								:error-messages="errors"
+								name="input-10-1"
+								counter
+								disabled
+								prepend-icon="mdi-lock"
+								:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+								@click:append="showPassword = !showPassword"
+							>
+							</v-text-field>
+						</validation-provider>
+					</v-form>
+					<v-btn :disabled="invalid" @click="procesarFormulario" color="success"
+						>Registrarme</v-btn
+					>
 				</validation-observer>
 			</v-card-text>
 		</v-card>
@@ -114,9 +116,9 @@
 			submit() {
 				console.log('ok👍');
 			},
-			...mapActions(['registrarUsuario', 'loguearUsuario']),
+			...mapActions(['registrarUsuario']),
 			async procesarFormulario() {
-				await this.loguearUsuario({
+				await this.registrarUsuario({
 					email: this.email,
 					password: this.password,
 				});
