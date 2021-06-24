@@ -1,15 +1,23 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<h1>Registro producto</h1>
+			Registro producto
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
 				<v-text-field prepend-icon="mdi-food-variant" label="Nombre" />
 				<v-text-field prepend-icon="mdi-cash" type="number" label="Precio compra" />
-				<v-select :items="tipos" label="Categoria" />
+				<v-text-field prepend-icon="mdi-cash-plus" type="number" label="Precio venta" />
+				<v-select
+					prepend-icon="mdi-format-list-bulleted-type"
+					:items="tipos"
+					label="Categoria"
+				/>
 			</v-form>
 		</v-card-text>
+		<v-card-actions>
+			<v-btn color="success">Agregar</v-btn>
+		</v-card-actions>
 	</v-card>
 </template>
 

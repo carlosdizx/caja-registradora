@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<h1>Registro cliente</h1>
+			Registro cliente
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
