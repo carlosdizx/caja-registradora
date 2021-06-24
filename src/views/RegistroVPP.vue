@@ -11,7 +11,7 @@
 			tabs: [''],
 		}),
 		mounted() {
-			this.tabs = ['mdi-point-of-sale','mdi-head-plus-outline','mdi-food'];
+			this.tabs = ['mdi-head-plus-outline','mdi-food','mdi-point-of-sale'];
 		},
 	};
 </script>

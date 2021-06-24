@@ -4,11 +4,8 @@
 			<!--<v-app-bar-nav-icon></v-app-bar-nav-icon>-->
 			<v-toolbar-title>{{ titulo }}</v-toolbar-title>
 			<v-spacer></v-spacer>
-			<v-btn icon>
-				<v-icon>mdi-magnify</v-icon>
-			</v-btn>
-			<v-btn icon>
-				<v-icon>mdi-dots-vertical</v-icon>
+			<v-btn @click="cerrarSesion" icon>
+				<v-icon>mdi-exit-to-app</v-icon>
 			</v-btn>
 			<template v-slot:extension>
 				<v-tabs v-model="tab" align-with-title>
@@ -31,6 +28,8 @@
 </template>
 
 <script>
+	import { mapActions } from 'vuex';
+
 	export default {
 		name: 'ToolBar',
 		data: () => ({
@@ -40,6 +39,9 @@
 			tabs: null,
 			color: String,
 			titulo: String,
+		},
+		methods: {
+			...mapActions(['cerrarSesion']),
 		},
 	};
 </script>

@@ -1,5 +1,8 @@
 <template>
-	<ToolBar titulo="Inicio" color="indigo" :tabs="tabs" />
+  <div>
+    <ToolBar titulo="Inicio" color="indigo" :tabs="tabs" />
+    <h1>Hola amigos como estan!</h1>
+  </div>
 </template>
 
 <script>

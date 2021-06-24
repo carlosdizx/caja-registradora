@@ -50,9 +50,9 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		cerrarSesion({ commit }) {
-			commit('setUser', null);
-			router.push('/ingreso');
+		async cerrarSesion({ commit }) {
+			commit('setUsuario', null);
+			await router.push('/');
 			localStorage.removeItem('usuario');
 		},
 		registrarUsuario({ commit }, usuario) {
