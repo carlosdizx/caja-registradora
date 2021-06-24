@@ -110,7 +110,7 @@
 			submit() {
 				this.$refs.observer.validate();
 			},
-			...mapActions(['registrarUsuario', 'loguearUsuario']),
+			...mapActions(['loguearUsuarioConToken', 'loguearUsuario']),
 			async procesarFormulario() {
 				await this.loguearUsuario({
 					email: this.email,
@@ -118,10 +118,10 @@
 				});
 			},
 		},
-    created() {
-
-    },
-    computed: {
+		mounted() {
+			this.loguearUsuarioConToken();
+		},
+		computed: {
 			...mapState(['error']),
 		},
 	};

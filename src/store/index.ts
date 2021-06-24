@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
-import { LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
+import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
 
 Vue.use(Vuex);
 
@@ -11,6 +11,7 @@ export default new Vuex.Store({
 		key: 'AIzaSyCIhEDFb6OctO_CBNO0KfYRWQy8A0PeGLE',
 		urlSingIn:
 			'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+		urlSingInToken: 'https://securetoken.googleapis.com/v1/token?key=',
 		urlSingUp: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
 		usuario: null,
 		error: { tipo: '', message: '' },
@@ -62,6 +63,11 @@ export default new Vuex.Store({
 		},
 		loguearUsuario({ commit }, usuario) {
 			LOGIN_USUARIO(usuario)
+				.then((response) => {})
+				.catch((error) => {});
+		},
+		loguearUsuarioConToken({ commit }) {
+			CARGAR_USUARIO()
 				.then((response) => {})
 				.catch((error) => {});
 		},
