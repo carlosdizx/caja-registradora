@@ -13,9 +13,39 @@ export default new Vuex.Store({
 			'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
 		urlSingUp: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
 		usuario: null,
+		error: { tipo: '', message: '' },
 	},
 	mutations: {
-		setUser(state, payload) {
+		setError(state, payload) {
+			if (payload === null) {
+				return (state.error = { tipo: '', message: '' });
+			}
+			if (payload === 'EMAIL_NOT_FOUND') {
+				return (state.error = {
+					tipo: 'email',
+					message: 'Email no registrado',
+				});
+			}
+			if (payload === 'INVALID_PASSWORD') {
+				return (state.error = {
+					tipo: 'password',
+					message: 'Contraseña incorrecta',
+				});
+			}
+			if (payload === 'EMAIL_EXISTS') {
+				return (state.error = {
+					tipo: 'email',
+					message: 'El correo ya esta registrado',
+				});
+			}
+			if (payload === 'INVALID_EMAIL') {
+				return (state.error = {
+					tipo: 'email',
+					message: 'El correo no esta bien escrito',
+				});
+			}
+		},
+		setUsuario(state, payload) {
 			state.usuario = payload;
 		},
 	},
@@ -27,13 +57,24 @@ export default new Vuex.Store({
 		},
 		registrarUsuario({ commit }, usuario) {
 			REGISTRAR_USUARIO(usuario)
-				.then((response) => console.log(response))
-				.catch((error) => console.log(error));
+				.then((response) => {})
+				.catch((error) => {});
 		},
 		loguearUsuario({ commit }, usuario) {
 			LOGIN_USUARIO(usuario)
-				.then((response) => console.log(''))
-				.catch((error) => console.log(error));
+				.then((response) => {})
+				.catch((error) => {});
+		},
+		setUsuario({ commit }, usuario) {
+			commit('setUsuario', usuario);
+		},
+		setError({ commit }, error) {
+			commit('setError', error);
+		},
+	},
+	getters: {
+		usuarioAutenticado(state) {
+			return !!state.usuario;
 		},
 	},
 	modules: {},

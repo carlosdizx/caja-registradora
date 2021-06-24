@@ -17,12 +17,11 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 		console.log(res);
 		if (res.error) {
 			console.log(res.error);
-			//return commit('setError', res.error.message);
+			return store.dispatch('setError', res.error.message);
 		}
-		//commit('setError', null);
-		//commit('setUser', userDB);
-		await router.push('/');
-		//localStorage.setItem('usuario', JSON.stringify(userDB));
+		await store.dispatch('setError', null);
+		await store.dispatch('setUsuario', res);
+		localStorage.setItem('usuario', JSON.stringify(res));
 	} catch (error) {
 		console.log(error);
 	}

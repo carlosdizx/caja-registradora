@@ -2,7 +2,11 @@
 	<v-layout align-center>
 		<v-card class="mx-auto" width="1000" max-width="1000">
 			<v-card-title class="mx-5" color="indigo">
-				Registro de usuario
+				Registro de usuario {{ usuario }}
+				<v-spacer></v-spacer>
+				<v-alert v-if="error.tipo !== ''" dense outlined type="error">
+					{{ error.message }}
+				</v-alert>
 			</v-card-title>
 			<v-card-text>
 				<validation-observer ref="observer" v-slot="{ invalid }">
@@ -73,7 +77,7 @@
 		ValidationProvider,
 		setInteractionMode,
 	} from 'vee-validate';
-	import { mapActions } from 'vuex';
+	import { mapState, mapActions } from 'vuex';
 
 	setInteractionMode('eager');
 
@@ -123,6 +127,9 @@
 					password: this.password,
 				});
 			},
+		},
+		computed: {
+			...mapState(['error', 'usuario']),
 		},
 	};
 </script>
