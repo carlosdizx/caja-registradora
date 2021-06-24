@@ -2,7 +2,7 @@
 	<v-layout align-center>
 		<v-card class="mx-auto" width="1000" max-width="1000">
 			<v-card-title class="mx-5" color="indigo">
-				Registro de usuario {{ usuario }}
+				Registro de usuario
 				<v-spacer></v-spacer>
 				<v-alert v-if="error.tipo !== ''" dense outlined type="error">
 					{{ error.message }}
@@ -129,7 +129,7 @@
 			},
 		},
 		computed: {
-			...mapState(['error', 'usuario']),
+			...mapState(['error']),
 		},
 	};
 </script>

@@ -42,19 +42,18 @@
 						</v-text-field>
 					</validation-provider>
 				</v-form>
-				<v-btn
-					@click="procesarFormulario"
-					color="info"
-					type="submit"
-					:disabled="invalid"
-					>Iniciar sesion</v-btn
-				>
+				<v-btn @click="procesarFormulario" color="info" type="submit" :disabled="invalid">
+					Iniciar sesion
+				</v-btn>
 				<router-link to="/registroLogin" v-slot="{ navigate }" custom>
-					<v-btn @click="navigate" @keypress.enter="navigate" role="link" color="success"
-						>Registrarme</v-btn
-					>
+					<v-btn @click="navigate" @keypress.enter="navigate" role="link" color="success">
+						Registrarme
+					</v-btn>
 				</router-link>
 			</validation-observer>
+      <v-alert v-if="error.tipo !== ''" dense outlined type="error">
+        {{ error.message }}
+      </v-alert>
 		</v-card-text>
 	</v-card>
 </template>
@@ -67,7 +66,7 @@
 		ValidationProvider,
 		setInteractionMode,
 	} from 'vee-validate';
-	import { mapActions } from 'vuex';
+	import { mapActions, mapState } from 'vuex';
 
 	setInteractionMode('eager');
 
@@ -119,11 +118,8 @@
 				});
 			},
 		},
+		computed: {
+			...mapState(['error']),
+		},
 	};
 </script>
-
-<style scoped>
-	.v-btn {
-		text-decoration: none !important;
-	}
-</style>

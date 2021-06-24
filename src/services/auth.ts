@@ -14,7 +14,6 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 				}),
 			})
 		).json();
-		console.log(res);
 		if (res.error) {
 			console.log(res.error);
 			return store.dispatch('setError', res.error.message);
@@ -22,6 +21,7 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 		await store.dispatch('setError', null);
 		await store.dispatch('setUsuario', res);
 		localStorage.setItem('usuario', JSON.stringify(res));
+		await router.push('/');
 	} catch (error) {
 		console.log(error);
 	}
@@ -41,11 +41,12 @@ export const LOGIN_USUARIO = async (usuario: { email: string; password: string }
 		).json();
 		if (res.error) {
 			console.log(res.error);
-			//return commit('setError', userDB.error.message);
+			return store.dispatch('setError', res.error.message);
 		}
-		//commit('setError', null);
-		//commit('setUser', userDB);
-		//await router.push('/');
+		await store.dispatch('setError', null);
+		await store.dispatch('setUsuario', res);
+		localStorage.setItem('usuario', JSON.stringify(res));
+		await router.push('/');
 		localStorage.setItem('usuario', JSON.stringify(res));
 	} catch (error) {
 		console.log(error);
