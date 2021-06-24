@@ -28,16 +28,18 @@
 			</v-toolbar>
 		</v-card>
 		<v-container>
-			<RegistroCliente v-if="index === 3" />
+			<RegistroCliente v-if="index === 1" />
+			<RegistroProducto v-if="index === 2" />
 		</v-container>
 	</div>
 </template>
 
 <script>
 	import RegistroCliente from '../forms/RegistroCliente';
+	import RegistroProducto from '../forms/RegistroProducto';
 	export default {
 		name: 'ToolBar',
-		components: { RegistroCliente },
+		components: { RegistroCliente,RegistroProducto },
 		data: () => ({
 			tab: null,
 			index: 3,
