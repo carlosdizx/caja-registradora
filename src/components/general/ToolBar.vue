@@ -13,11 +13,17 @@
 			<template v-slot:extension>
 				<v-tabs v-model="tab" align-with-title>
 					<v-tabs-slider color="yellow"></v-tabs-slider>
-					<v-tab v-for="item in tabs" :key="item">
-						<v-icon>
-							{{ item }}
-						</v-icon>
-					</v-tab>
+					<router-link
+						v-for="item in tabs"
+						:key="item"
+						:to="item.link"
+						v-slot="{ navigate }"
+						custom
+					>
+						<v-tab @click="navigate">
+							{{ item.name }}
+						</v-tab>
+					</router-link>
 				</v-tabs>
 			</template>
 		</v-toolbar>
