@@ -75,7 +75,6 @@ export const CARGAR_USUARIO = async () => {
 			return await store.dispatch('setUsuario', null);
 		}
 		await router.push('/inicio');
-		console.log(res);
 	} catch (error) {
 		console.log(error);
 	}
