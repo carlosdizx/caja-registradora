@@ -5,8 +5,9 @@
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
-				<v-text-field label="Nombre" />
-				<v-text-field type="number" label="Precio" />
+				<v-text-field prepend-icon="mdi-food-variant" label="Nombre" />
+				<v-text-field prepend-icon="mdi-cash" type="number" label="Precio compra" />
+				<v-select :items="tipos" label="Categoria" />
 			</v-form>
 		</v-card-text>
 	</v-card>
@@ -21,6 +22,7 @@
 		setInteractionMode,
 	} from 'vee-validate';
 	import { mapActions, mapState } from 'vuex';
+	import { TIPOS } from '../../const/tipoProductos';
 	setInteractionMode('eager');
 
 	extend('digits', {
@@ -53,6 +55,9 @@
 			ValidationProvider,
 			ValidationObserver,
 		},
+		data: () => ({
+			tipos: TIPOS,
+		}),
 		methods: {
 			submit() {},
 		},
