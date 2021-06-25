@@ -77,18 +77,12 @@ export default new Vuex.Store({
 		},
 		async registrarProducto({ commit, state }, producto) {
 			try {
-				//const usuario = this.state.usuario;
-				const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
-				await REGISTRAR_PRODUCTO(producto,usuario);
+				const usuario = this.state.usuario;
+				//const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
+				await REGISTRAR_PRODUCTO(producto, usuario);
 			} catch (error) {
 				console.log(error);
 			}
-
-			//const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
-			//console.log('usuario: ' + state.usuario);
-			//const usuarioTemp = await JSON.stringify(state.usuario);
-			//JSON.parse(localStorage.getItem("usuario"))
-			//console.log(usuarioTemp)
 		},
 	},
 	getters: {
