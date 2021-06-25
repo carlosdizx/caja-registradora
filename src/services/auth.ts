@@ -1,9 +1,11 @@
 import { HTTP } from './axios';
 import router from '@/router';
 import store from '../store';
-const URL_SING_UP = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='
-const URL_SING_IN = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
-const KEY = 'AIzaSyB1fAUlYcrrjHaVuMp0IG5D2ROCICzROM8'
+const URL_SING_UP = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
+const URL_SING_IN =
+	'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
+const URL_SING_IN_TOKEN = 'https://securetoken.googleapis.com/v1/token?key=';
+const KEY = 'AIzaSyB1fAUlYcrrjHaVuMp0IG5D2ROCICzROM8';
 
 export const REGISTRAR_USUARIO = async (usuario: { email: string; password: string }) => {
 	try {
@@ -33,7 +35,7 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 export const LOGIN_USUARIO = async (usuario: { email: string; password: string }) => {
 	try {
 		const res = await (
-			await fetch(`${store.state.urlSingIn}${store.state.key}`, {
+			await fetch(`${URL_SING_IN}${KEY}`, {
 				method: 'POST',
 				body: JSON.stringify({
 					email: usuario.email,
@@ -64,7 +66,7 @@ export const CARGAR_USUARIO = async () => {
 	}
 	try {
 		const res = await (
-			await fetch(`${store.state.urlSingInToken}${store.state.key}`, {
+			await fetch(`${URL_SING_IN_TOKEN}${KEY}`, {
 				method: 'POST',
 				body: JSON.stringify({
 					grant_type: 'refresh_token',

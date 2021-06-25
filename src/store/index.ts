@@ -77,8 +77,8 @@ export default new Vuex.Store({
 		},
 		async registrarProducto({ commit, state }, producto) {
 			try {
-				const usuario = this.state.usuario;
-				//const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
+				//const usuario = this.state.usuario;
+				const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
 				await REGISTRAR_PRODUCTO(producto, usuario);
 			} catch (error) {
 				console.log(error);

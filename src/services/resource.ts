@@ -11,8 +11,7 @@ export const REGISTRAR_PRODUCTO = async (
 	},
 	usuario: any
 ) => {
-	//console.log(`${URL_BASE}${usuario.localId}/${producto.nombre}.json?auth=${usuario.idToken}.json?auth=${usuario.idToken}`);
-	const res = await fetch(`${URL_BASE}/productos/${producto.nombre}.json`, {
+	const res = await fetch(`${URL_BASE}/productos/${producto.nombre}.json?auth=${usuario.idToken}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
