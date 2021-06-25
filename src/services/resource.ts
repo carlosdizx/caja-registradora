@@ -24,24 +24,3 @@ export const REGISTRAR_PRODUCTO = async (
 	const resDB = await res.json();
 	console.log(resDB);
 };
-/**
-	HTTP({
-		method: 'post',
-		url: `${URL_BASE}productos/${producto.nombre}.json?auth=${idToken}`,
-		data: {
-			producto,
-		},
-	});
-	 */
-//HTTP.put(`productos/${producto.nombre}.json?auth=${idToken}`, producto);
-
-/**
- HTTP({
-		method: 'post',
-		url: `https://caja-registradora-arena-center-default-rtdb.firebaseio.com/productos/${producto.nombre}.json${idToken}`,
-		data: {
-			firstName: 'Finn',
-			lastName: 'Williams',
-		},
-
-	});*/
