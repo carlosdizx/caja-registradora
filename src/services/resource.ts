@@ -22,3 +22,28 @@ export const REGISTRAR_PRODUCTO = async (
 	const resDB = await res.json();
 	console.log(resDB);
 };
+
+//---------------- Cliente ----------------
+
+export const REGISTRAR_CLIENTE = async (
+	cliente: {
+		nombre: string;
+		precioCompra: number;
+		precioVenta: number;
+		tipo: string;
+	},
+	usuario: any
+) => {
+	const res = await fetch(
+		`${URL_BASE}/clientes/${usuario.localId}/${cliente.nombre}.json?auth=${usuario.idToken}`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(cliente),
+		}
+	);
+	const resDB = await res.json();
+	console.log(resDB);
+};
