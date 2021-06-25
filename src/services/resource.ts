@@ -11,13 +11,16 @@ export const REGISTRAR_PRODUCTO = async (
 	},
 	usuario: any
 ) => {
-	const res = await fetch(`${URL_BASE}/productos/${producto.nombre}.json?auth=${usuario.idToken}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(producto),
-	});
+	const res = await fetch(
+		`${URL_BASE}/productos/${usuario.localId}/${producto.nombre}.json?auth=${usuario.idToken}`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(producto),
+		}
+	);
 	const resDB = await res.json();
 	console.log(resDB);
 };
