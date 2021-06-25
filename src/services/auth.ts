@@ -21,7 +21,7 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 		await store.dispatch('setError', null);
 		await store.dispatch('setUsuario', res);
 		localStorage.setItem('usuario', JSON.stringify(res));
-		await router.push('/');
+		await router.push('/inicio');
 	} catch (error) {
 		console.log(error);
 	}
@@ -74,6 +74,7 @@ export const CARGAR_USUARIO = async () => {
 			alert('Vuelva a iniciar sesion!');
 			return await store.dispatch('setUsuario', null);
 		}
+		await store.dispatch('setUsuario', res);
 		await router.push('/inicio');
 	} catch (error) {
 		console.log(error);

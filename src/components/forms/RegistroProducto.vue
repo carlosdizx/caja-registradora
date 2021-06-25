@@ -13,14 +13,14 @@
 				<v-text-field
 					v-model.number="productoTemplate.precioCompra"
 					prepend-icon="mdi-cash"
-          @keypress="esNumero($event)"
+					@keypress="esNumero($event)"
 					type="number"
 					label="Precio compra"
 				/>
 				<v-text-field
 					v-model.number="productoTemplate.precioVenta"
 					prepend-icon="mdi-cash-plus"
-          @keypress="esNumero($event)"
+					@keypress="esNumero($event)"
 					type="number"
 					label="Precio venta"
 				/>
@@ -46,9 +46,9 @@
 		ValidationProvider,
 		setInteractionMode,
 	} from 'vee-validate';
-	import { mapActions, mapState } from 'vuex';
+	import { mapActions } from 'vuex';
 	import { TIPOS } from '../../const/tipoProductos';
-  import {ES_NUMERO} from "../../const/funciones";
+	import { ES_NUMERO } from '../../const/funciones';
 	setInteractionMode('eager');
 
 	extend('digits', {
@@ -91,8 +91,8 @@
 			},
 		}),
 		methods: {
-			submit() {
-				console.log(this.productoTemplate);
+			async submit() {
+				await this.registrarProducto(this.productoTemplate);
 				this.productoTemplate = {
 					nombre: '',
 					precioCompra: null,
@@ -100,9 +100,10 @@
 					tipo: '',
 				};
 			},
-      esNumero(evt) {
-        ES_NUMERO(evt);
-      }
+			esNumero(evt) {
+				ES_NUMERO(evt);
+			},
+			...mapActions(['registrarProducto']),
 		},
 	};
 </script>

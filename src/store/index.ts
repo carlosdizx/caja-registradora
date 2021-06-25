@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
 import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
+import { REGISTRAR_PRODUCTO } from '@/services/resource';
 
 Vue.use(Vuex);
 
@@ -20,32 +21,27 @@ export default new Vuex.Store({
 		setError(state, payload) {
 			if (payload === null) {
 				return (state.error = { tipo: '', message: '' });
-			}
-			else if (payload === 'EMAIL_NOT_FOUND') {
+			} else if (payload === 'EMAIL_NOT_FOUND') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'Email no registrado',
 				});
-			}
-			else if (payload === 'INVALID_PASSWORD') {
+			} else if (payload === 'INVALID_PASSWORD') {
 				return (state.error = {
 					tipo: 'password',
 					message: 'Contraseña incorrecta',
 				});
-			}
-			else if (payload === 'EMAIL_EXISTS') {
+			} else if (payload === 'EMAIL_EXISTS') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'El correo ya esta registrado',
 				});
-			}
-			else if (payload === 'INVALID_EMAIL') {
+			} else if (payload === 'INVALID_EMAIL') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'El correo no esta bien escrito',
 				});
-			}
-			else if (payload === 'USER_DISABLED') {
+			} else if (payload === 'USER_DISABLED') {
 				return (state.error = {
 					tipo: 'email',
 					message: 'El usuario esta baneado',
@@ -64,20 +60,14 @@ export default new Vuex.Store({
 				localStorage.removeItem('usuario');
 			}, 1000);
 		},
-		registrarUsuario({ commit }, usuario) {
-			REGISTRAR_USUARIO(usuario)
-				.then((response) => {})
-				.catch((error) => {});
+		async registrarUsuario({ commit }, usuario) {
+			await REGISTRAR_USUARIO(usuario);
 		},
-		loguearUsuario({ commit }, usuario) {
-			LOGIN_USUARIO(usuario)
-				.then((response) => {})
-				.catch((error) => {});
+		async loguearUsuario({ commit }, usuario) {
+			await LOGIN_USUARIO(usuario);
 		},
-		loguearUsuarioConToken({ commit }) {
-			CARGAR_USUARIO()
-				.then((response) => {})
-				.catch((error) => {});
+		async loguearUsuarioConToken({ commit }) {
+			await CARGAR_USUARIO();
 		},
 		setUsuario({ commit }, usuario) {
 			commit('setUsuario', usuario);
@@ -85,10 +75,28 @@ export default new Vuex.Store({
 		setError({ commit }, error) {
 			commit('setError', error);
 		},
+		async registrarProducto({ commit, state }, producto) {
+			try {
+				//const usuario = this.state.usuario;
+				const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
+				await REGISTRAR_PRODUCTO(producto,usuario);
+			} catch (error) {
+				console.log(error);
+			}
+
+			//const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
+			//console.log('usuario: ' + state.usuario);
+			//const usuarioTemp = await JSON.stringify(state.usuario);
+			//JSON.parse(localStorage.getItem("usuario"))
+			//console.log(usuarioTemp)
+		},
 	},
 	getters: {
 		usuarioAutenticado(state) {
 			return !!state.usuario;
+		},
+		getUsuario(state) {
+			return state.usuario;
 		},
 	},
 	modules: {},
