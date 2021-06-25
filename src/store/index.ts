@@ -8,12 +8,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		urlDB: 'https://caja-registradora-arena-center-default-rtdb.firebaseio.com/',
-		key: 'AIzaSyCIhEDFb6OctO_CBNO0KfYRWQy8A0PeGLE',
-		urlSingIn:
-			'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
-		urlSingInToken: 'https://securetoken.googleapis.com/v1/token?key=',
-		urlSingUp: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
 		usuario: null,
 		error: { tipo: '', message: '' },
 	},
@@ -58,7 +52,7 @@ export default new Vuex.Store({
 			setTimeout(function() {
 				router.push('/');
 				localStorage.removeItem('usuario');
-			}, 1000);
+			}, 700);
 		},
 		async registrarUsuario({ commit }, usuario) {
 			await REGISTRAR_USUARIO(usuario);

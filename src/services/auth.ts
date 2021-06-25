@@ -1,4 +1,3 @@
-import { HTTP } from './axios';
 import router from '@/router';
 import store from '../store';
 const URL_SING_UP = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
