@@ -5,7 +5,7 @@
 <script>
 	import ToolBarListado from '../components/general/ToolBarListado';
 	export default {
-		name: 'Listado',
+		name: 'ListadoVPP',
 		components: {
 			ToolBarListado,
 		},
