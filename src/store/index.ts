@@ -138,7 +138,7 @@ export default new Vuex.Store({
 				console.log(e);
 			}
 		},
-		async registrarVenta({ commit, state }, { cliente, venta }) {
+		async registrarVenta({ commit, state }, venta) {
 			try {
 				const usuario = this.state.usuario;
 				if (usuario === null) {
@@ -147,7 +147,7 @@ export default new Vuex.Store({
 					return alert('Vuelva a iniciar sesion!');
 				}
 				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
-				await REGISTRAR_VENTA(cliente, venta, usuario);
+				await REGISTRAR_VENTA( venta, usuario);
 			} catch (e) {
 				console.log(e);
 			}

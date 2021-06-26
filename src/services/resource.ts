@@ -80,20 +80,19 @@ export const LISTAR_CLIENTES = async (lista: [], usuario: any) => {
 
 //---------------- Venta ----------------
 export const REGISTRAR_VENTA = async (
-	cliente: {
-		documento: number;
-		nombres: string;
-		direccion: string;
-		celular: number;
-		correo: string;
-		fecha: number;
-	},
 	venta: {
+		cliente: {
+			documento: number;
+			nombres: string;
+			direccion: string;
+			celular: number;
+			correo: string;
+			fecha: number;
+		};
 		facturas: Array<any>;
 	},
 	usuario: any
 ) => {
-
 	const res = await fetch(
 		`${URL_BASE}ventas/${usuario.localId}/${shortid.generate()}.json?auth=${
 			usuario.idToken
@@ -104,7 +103,7 @@ export const REGISTRAR_VENTA = async (
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ cliente, venta }),
+			body: JSON.stringify(venta),
 		}
 	);
 	const resDB = await res.json();

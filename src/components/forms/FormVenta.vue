@@ -5,7 +5,12 @@
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
-				<v-select label="Seleccione un cliente" :items="clientes" item-text="nombres" />
+				<v-select
+					v-model="clienteSeleccionado"
+					label="Seleccione un cliente"
+					:items="clientes"
+					item-text="nombres"
+				/>
 				<hr />
 				<v-row>
 					<v-col cols="3">
@@ -63,6 +68,7 @@
 			productos: [],
 			comprados: [],
 			cantidad: 1,
+			clienteSeleccionado: null,
 			productoSeleccionado: null,
 			columnas: [
 				{ text: 'Producto', value: 'nombre' },
@@ -76,7 +82,7 @@
 			await this.listadoProductos(this.productos);
 		},
 		methods: {
-			...mapActions(['listadoClientes', 'listadoProductos']),
+			...mapActions(['listadoClientes', 'listadoProductos', 'registrarVenta']),
 			async calcularSubtotal() {
 				if (this.cantidad <= 0 || this.productoSeleccionado === null) {
 					return alert(
@@ -98,7 +104,10 @@
 					}
 				});
 			},
-			submit() {},
+			submit() {
+				const venta = { cliente: this.clienteSeleccionado, compras: this.comprados };
+				this.registrarVenta(venta);
+			},
 			esNumero(evt) {
 				ES_NUMERO(evt);
 			},
