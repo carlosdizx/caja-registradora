@@ -1,22 +1,26 @@
 <template>
-	<v-card>
+	<v-card  class="mb-2">
 		{{ producto }}
-		<v-container>
 			<v-select
 				v-model="producto"
 				label="Seleccione producto"
 				:items="items"
 				item-text="nombre"
 			/>
-			<v-text-field v-model.number="cantidad" type="number" label="cantidad" />
-			<v-text-field v-model.number="subtotal" disabled type="number" label="Subtotal" />
-		</v-container>
+      <v-row>
+        <v-col cols="3">
+          <v-text-field v-model.number="cantidad" type="number" label="cantidad" />
+        </v-col>
+        <v-col cols="9">
+          <v-text-field v-model.number="subtotal" disabled type="number" label="Subtotal" />
+        </v-col>
+      </v-row>
 	</v-card>
 </template>
 
 <script>
 	export default {
-		name: 'itemVenta',
+		name: 'ItemVenta',
 		data: () => ({
 			producto: null,
 			cantidad: 1,
