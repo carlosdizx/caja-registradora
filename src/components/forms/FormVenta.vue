@@ -1,15 +1,22 @@
 <template>
 	<v-card>
-    <v-card-title>
-			Registro cliente
+		<v-card-title>
+			Registro venta
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
-				<v-select :items="clientes" item-text="nombres" />
+				<v-select label="Seleccione un cliente" :items="clientes" item-text="nombres" />
+        <v-btn>
+          agregar producto
+          <v-icon>mdi-cart-plus</v-icon>
+        </v-btn>
 			</v-form>
+      <br>
+      <hr>
+      <hr>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn @click="submit" color="success">Agregar</v-btn>
+			<v-btn @click="submit" color="success">Registrar venta</v-btn>
 		</v-card-actions>
 	</v-card>
 </template>
