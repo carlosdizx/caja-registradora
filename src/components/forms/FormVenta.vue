@@ -17,16 +17,15 @@
 						/>
 					</v-col>
 					<v-col cols="9">
-						<v-text-field
-							v-model.number="subtotal"
-							disabled
-							type="number"
-							label="Subtotal"
+						<v-select
+							v-model="productoSeleccionado"
+							label="Producto"
+							:items="productos"
+							item-text="nombre"
 						/>
 					</v-col>
 				</v-row>
-				<v-select label="Productos" :items="productos" item-text="nombre" />
-				<v-btn>
+				<v-btn @click="calcularSubtotal">
 					agregar producto
 					<v-icon>mdi-cart-plus</v-icon>
 				</v-btn>
@@ -57,7 +56,7 @@
 			productos: [],
 			comprados: [],
 			cantidad: 1,
-			subtotal: 0,
+			productoSeleccionado: null,
 		}),
 		async mounted() {
 			await this.listadoClientes(this.clientes);
@@ -65,6 +64,19 @@
 		},
 		methods: {
 			...mapActions(['listadoClientes', 'listadoProductos']),
+			async calcularSubtotal() {
+				if (this.cantidad !== 0 && this.productoSeleccionado !== null) {
+					await this.productos.filter((item) => item !== this.productoSeleccionado);
+					for (let i = 0; i < this.productos.length; i++) {
+						const producto = this.productos[i];
+						if (producto.nombre === this.productoSeleccionado ){
+              return this.productos.splice(i,1);
+            }
+					}
+					this.cantidad = 1;
+					this.productoSeleccionado = null;
+				}
+			},
 			submit() {},
 			esNumero(evt) {
 				ES_NUMERO(evt);

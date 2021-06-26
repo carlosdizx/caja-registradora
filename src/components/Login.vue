@@ -34,6 +34,7 @@
 							:error-messages="errors"
 							name="input-10-1"
 							counter
+              current-password
 							prepend-icon="mdi-lock"
 							:type="showPassword ? 'text' : 'password'"
 							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
