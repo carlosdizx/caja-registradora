@@ -6,10 +6,15 @@
 		<v-card-text>
 			<v-form @submit.prevent="submit">
 				<v-select label="Seleccione un cliente" :items="clientes" item-text="nombres" />
-        <hr>
+				<hr />
 				<v-row>
 					<v-col cols="3">
-						<v-text-field v-model.number="cantidad" type="number" label="cantidad" />
+						<v-text-field
+							v-model.number="cantidad"
+							type="number"
+							label="cantidad"
+							@keypress="esNumero($event)"
+						/>
 					</v-col>
 					<v-col cols="9">
 						<v-text-field
@@ -25,9 +30,9 @@
 					agregar producto
 					<v-icon>mdi-cart-plus</v-icon>
 				</v-btn>
-        <br>
-        <br>
-        <hr>
+				<br />
+				<br />
+				<hr />
 			</v-form>
 
 			<!--
@@ -61,6 +66,9 @@
 		methods: {
 			...mapActions(['listadoClientes', 'listadoProductos']),
 			submit() {},
+			esNumero(evt) {
+				ES_NUMERO(evt);
+			},
 		},
 	};
 </script>
