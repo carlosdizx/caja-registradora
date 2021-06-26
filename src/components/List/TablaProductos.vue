@@ -1,16 +1,26 @@
 <template>
-	<Tabla titulo="Listado de productos" :columnas="columnas" />
+	<Tabla titulo="Listado de productos" :columnas="columnas" :lista="lista" />
 </template>
 
 <script>
 	import Tabla from '../general/Tabla';
+	import { mapActions } from 'vuex';
 	export default {
 		name: 'TablaProductos',
-		data: () => ({
-			columnas: ['V1', 'V2', 'V3', 'V4', 'V5', 'V6'],
-		}),
 		components: {
 			Tabla,
+		},
+		data: () => ({
+			lista: [],
+			columnas: [
+				{ text: 'Nombre', value: 'nombre' },
+				{ text: 'Precio Compra', value: 'precioCompra' },
+				{ text: 'Precio Venta', value: 'precioVenta' },
+				{ text: 'Tipo', value: 'tipo' },
+			],
+		}),
+		methods: {
+			...mapActions(['']),
 		},
 	};
 </script>

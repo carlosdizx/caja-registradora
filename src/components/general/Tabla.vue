@@ -3,7 +3,7 @@
 		<v-card-title>{{ titulo }}</v-card-title>
 		<v-data-table
 			:headers="columnas"
-			:items="list"
+			:items="lista"
 			:items-per-page="5"
 			:footer-props="{
 				showFirstLastPage: true,
@@ -25,7 +25,7 @@
 		props: {
 			titulo: '',
 			columnas: [],
-			list: [],
+			lista: [],
 		},
 	};
 </script>
