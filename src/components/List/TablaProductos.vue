@@ -20,7 +20,10 @@
 			],
 		}),
 		methods: {
-			...mapActions(['']),
+			...mapActions(['listadoProductos']),
+		},
+		mounted() {
+			this.listadoProductos(this.lista);
 		},
 	};
 </script>

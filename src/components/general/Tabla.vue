@@ -11,6 +11,7 @@
 				lastIcon: 'mdi-arrow-collapse-right',
 				prevIcon: 'mdi-minus',
 				nextIcon: 'mdi-plus',
+				rowsPerPage:'sda'
 			}"
 			class="elevation-1"
 		>
