@@ -9,7 +9,7 @@
 					v-model="clienteSeleccionado"
 					label="Seleccione un cliente"
 					:items="clientes"
-					item-text="nombres"
+					item-text="documento"
 				/>
 				<hr />
 				<v-row>
@@ -40,7 +40,9 @@
 			</v-form>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn @click="submit" color="success">Registrar venta</v-btn>
+			<v-btn :disabled="comprados.length === 0" @click="submit" color="success"
+				>Registrar venta</v-btn
+			>
 			<v-btn text disabled>
 				Total
 				{{ total }}
@@ -70,12 +72,12 @@
 			cantidad: 1,
 			clienteSeleccionado: null,
 			productoSeleccionado: null,
+			total: 0,
 			columnas: [
 				{ text: 'Producto', value: 'nombre' },
 				{ text: 'Cantidad', value: 'cantidad' },
 				{ text: 'Subtotal', value: 'subTotal' },
 			],
-			total: 0,
 		}),
 		async mounted() {
 			await this.listadoClientes(this.clientes);
@@ -104,9 +106,17 @@
 					}
 				});
 			},
-			submit() {
+			async submit() {
+				if (this.clienteSeleccionado === null) {
+					return alert('Seleccione un cliente');
+				}
 				const venta = { cliente: this.clienteSeleccionado, compras: this.comprados };
-				this.registrarVenta(venta);
+				await this.registrarVenta(venta);
+				this.clienteSeleccionado = null;
+				this.comprados = [];
+				this.cantidad = 1;
+				this.total = 0;
+				this.productoSeleccionado = null;
 			},
 			esNumero(evt) {
 				ES_NUMERO(evt);
