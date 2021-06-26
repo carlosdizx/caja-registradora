@@ -7,6 +7,7 @@ import {
 	LISTAR_PRODUCTOS,
 	REGISTRAR_CLIENTE,
 	REGISTRAR_PRODUCTO,
+	REGISTRAR_VENTA,
 } from '@/services/resource';
 
 Vue.use(Vuex);
@@ -133,6 +134,20 @@ export default new Vuex.Store({
 				}
 				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
 				await LISTAR_CLIENTES(lista, usuario);
+			} catch (e) {
+				console.log(e);
+			}
+		},
+		async registrarVenta({ commit, state }, { cliente, venta }) {
+			try {
+				const usuario = this.state.usuario;
+				if (usuario === null) {
+					localStorage.removeItem('usuario');
+					await router.push('/');
+					return alert('Vuelva a iniciar sesion!');
+				}
+				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				await REGISTRAR_VENTA(cliente, venta, usuario);
 			} catch (e) {
 				console.log(e);
 			}
