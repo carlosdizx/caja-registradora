@@ -2,7 +2,12 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
 import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
-import {LISTAR_PRODUCTOS, REGISTRAR_CLIENTE, REGISTRAR_PRODUCTO} from '@/services/resource';
+import {
+	LISTAR_CLIENTES,
+	LISTAR_PRODUCTOS,
+	REGISTRAR_CLIENTE,
+	REGISTRAR_PRODUCTO,
+} from '@/services/resource';
 
 Vue.use(Vuex);
 
@@ -104,7 +109,7 @@ export default new Vuex.Store({
 				console.log(e);
 			}
 		},
-		async listadoProductos({commit, state},lista){
+		async listadoProductos({ commit, state }, lista) {
 			try {
 				const usuario = this.state.usuario;
 				if (usuario === null) {
@@ -113,11 +118,25 @@ export default new Vuex.Store({
 					return alert('Vuelva a iniciar sesion!');
 				}
 				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
-				await LISTAR_PRODUCTOS( lista,usuario);
+				await LISTAR_PRODUCTOS(lista, usuario);
 			} catch (e) {
 				console.log(e);
 			}
-		}
+		},
+		async listadoClientes({ commit, state }, lista) {
+			try {
+				const usuario = this.state.usuario;
+				if (usuario === null) {
+					localStorage.removeItem('usuario');
+					await router.push('/');
+					return alert('Vuelva a iniciar sesion!');
+				}
+				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				await LISTAR_CLIENTES(lista, usuario);
+			} catch (e) {
+				console.log(e);
+			}
+		},
 	},
 	getters: {
 		usuarioAutenticado(state) {

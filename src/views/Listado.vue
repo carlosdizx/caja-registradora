@@ -1,5 +1,5 @@
 <template>
-	<ToolBarListado titulo="Registro" color="indigo" :tabs="tabs" />
+	<ToolBarListado titulo="Listado" color="indigo" :tabs="tabs" />
 </template>
 
 <script>

@@ -67,3 +67,13 @@ export const REGISTRAR_CLIENTE = async (
 		return await store.dispatch('setError', resDB.error.message);
 	}
 };
+
+export const LISTAR_CLIENTES = async (lista: [], usuario: any) => {
+	const res = await (
+		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
+	).json();
+	for (let id in res) {
+		// @ts-ignore
+		lista.push(res[id]);
+	}
+};
