@@ -4,23 +4,49 @@
 			Registro cliente
 		</v-card-title>
 		<v-card-text>
+			{{ clienteTemplate }}
 			<v-form @submit.prevent="submit">
 				<v-text-field
+					v-model.number="clienteTemplate.documento"
 					type="number"
 					@keypress="esNumero($event)"
 					label="Documento de identidad"
-          prepend-icon="mdi-card-account-details"
+					prepend-icon="mdi-card-account-details"
 				/>
-				<v-text-field label="Nombres y apellidos" prepend-icon="mdi-account" />
-				<v-text-field label="Dirrecion" prepend-icon="mdi-home" />
-				<v-text-field type="number" @keypress="esNumero($event)" label="Celular" prepend-icon="mdi-phone" />
-				<v-text-field type="email" label="Correo" prepend-icon="mdi-email"/>
-				<v-text-field type="date" label="Fecha de nacimiento" prepend-icon="mdi-calendar-range"/>
+				<v-text-field
+					v-model="clienteTemplate.nombres"
+					label="Nombres y apellidos"
+					prepend-icon="mdi-account"
+				/>
+				<v-text-field
+					v-model="clienteTemplate.direccion"
+					label="Dirrecion"
+					prepend-icon="mdi-home"
+				/>
+				<v-text-field
+					v-model.number="clienteTemplate.celular"
+					type="number"
+					@keypress="esNumero($event)"
+					label="Celular"
+					prepend-icon="mdi-phone"
+				/>
+				<v-text-field
+					v-model="clienteTemplate.correo"
+					type="email"
+					label="Correo"
+					prepend-icon="mdi-email"
+				/>
+				<v-text-field
+					v-model="clienteTemplate.fecha"
+					type="date"
+					label="Fecha de nacimiento"
+					prepend-icon="mdi-calendar-range"
+				/>
 			</v-form>
 		</v-card-text>
-    <v-card-actions>
-      <v-btn @click="submit" color="success">Agregar</v-btn>
-    </v-card-actions>
+		<v-card-actions>
+			<v-btn @click="submit" color="success">Agregar</v-btn>
+		</v-card-actions>
 	</v-card>
 </template>
 
@@ -66,8 +92,29 @@
 			ValidationProvider,
 			ValidationObserver,
 		},
+		data: () => ({
+			clienteTemplate: {
+				documento: null,
+				nombres: '',
+				direccion: '',
+				celular: null,
+				correo: '',
+				fecha: null,
+			},
+		}),
 		methods: {
-			submit() {},
+			async submit() {
+				await this.registrarCliente(this.clienteTemplate);
+				this.clienteTemplate = {
+					documento: null,
+					nombres: '',
+					direccion: '',
+					celular: null,
+					correo: '',
+					fecha: null,
+				};
+			},
+			...mapActions(['registrarCliente']),
 			esNumero(evt) {
 				ES_NUMERO(evt);
 			},

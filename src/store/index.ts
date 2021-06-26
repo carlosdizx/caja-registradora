@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import router from '@/router';
 import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
-import { REGISTRAR_PRODUCTO } from '@/services/resource';
+import { REGISTRAR_CLIENTE, REGISTRAR_PRODUCTO } from '@/services/resource';
 
 Vue.use(Vuex);
 
@@ -40,6 +40,13 @@ export default new Vuex.Store({
 					tipo: 'email',
 					message: 'El usuario esta baneado',
 				});
+			} else if (payload === 'Auth token is expired') {
+				state.usuario = null;
+				localStorage.removeItem('usuario');
+				return (state.error = {
+					tipo: 'token',
+					message: 'Vuelva a iniciar sesion, token expirado!',
+				});
 			}
 		},
 		setUsuario(state, payload) {
@@ -71,11 +78,30 @@ export default new Vuex.Store({
 		},
 		async registrarProducto({ commit, state }, producto) {
 			try {
-				//const usuario = this.state.usuario;
-				const usuario = JSON.parse(<string>localStorage.getItem("usuario"))
+				const usuario = this.state.usuario;
+				if (usuario === null) {
+					localStorage.removeItem('usuario');
+					await router.push('/');
+					return alert('Vuelva a iniciar sesion!');
+				}
+				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
 				await REGISTRAR_PRODUCTO(producto, usuario);
 			} catch (error) {
 				console.log(error);
+			}
+		},
+		async registrarCliente({ commit, state }, cliente) {
+			try {
+				const usuario = this.state.usuario;
+				if (usuario === null) {
+					localStorage.removeItem('usuario');
+					await router.push('/');
+					return alert('Vuelva a iniciar sesion!');
+				}
+				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				await REGISTRAR_CLIENTE(cliente, usuario);
+			} catch (e) {
+				console.log(e);
 			}
 		},
 	},

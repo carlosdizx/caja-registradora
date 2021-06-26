@@ -1,4 +1,6 @@
 const URL_BASE = 'https://caja-registradora-app-default-rtdb.firebaseio.com/';
+import store from '../store';
+
 //---------------- Producto ----------------
 export const REGISTRAR_PRODUCTO = async (
 	producto: {
@@ -10,7 +12,7 @@ export const REGISTRAR_PRODUCTO = async (
 	usuario: any
 ) => {
 	const res = await fetch(
-		`${URL_BASE}/productos/${usuario.localId}/${producto.nombre}.json?auth=${usuario.idToken}`,
+		`${URL_BASE}productos/${usuario.localId}/${producto.nombre}.json?auth=${usuario.idToken}`,
 		{
 			method: 'PUT',
 			headers: {
@@ -20,6 +22,10 @@ export const REGISTRAR_PRODUCTO = async (
 		}
 	);
 	const resDB = await res.json();
+	if (resDB.error) {
+		console.log(resDB.error);
+		return await store.dispatch('setError', resDB.error.message);
+	}
 	console.log(resDB);
 };
 
@@ -27,15 +33,17 @@ export const REGISTRAR_PRODUCTO = async (
 
 export const REGISTRAR_CLIENTE = async (
 	cliente: {
-		nombre: string;
-		precioCompra: number;
-		precioVenta: number;
-		tipo: string;
+		documento: number;
+		nombres: string;
+		direccion: string;
+		celular: number;
+		correo: string;
+		fecha: number;
 	},
 	usuario: any
 ) => {
 	const res = await fetch(
-		`${URL_BASE}/clientes/${usuario.localId}/${cliente.nombre}.json?auth=${usuario.idToken}`,
+		`${URL_BASE}clientes/${usuario.localId}/${cliente.documento}.json?auth=${usuario.idToken}`,
 		{
 			method: 'PUT',
 			headers: {
@@ -45,5 +53,9 @@ export const REGISTRAR_CLIENTE = async (
 		}
 	);
 	const resDB = await res.json();
+	if (resDB.error) {
+		console.log(resDB.error);
+		return await store.dispatch('setError', resDB.error.message);
+	}
 	console.log(resDB);
 };

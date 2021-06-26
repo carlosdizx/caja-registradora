@@ -91,6 +91,7 @@
 			},
 		}),
 		methods: {
+			...mapActions(['registrarProducto']),
 			async submit() {
 				await this.registrarProducto(this.productoTemplate);
 				this.productoTemplate = {
@@ -103,7 +104,6 @@
 			esNumero(evt) {
 				ES_NUMERO(evt);
 			},
-			...mapActions(['registrarProducto']),
 		},
 	};
 </script>
