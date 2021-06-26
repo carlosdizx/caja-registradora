@@ -65,8 +65,16 @@
 		methods: {
 			...mapActions(['listadoClientes', 'listadoProductos']),
 			async calcularSubtotal() {
-				if (this.cantidad !== 0 && this.productoSeleccionado !== null) {
+			  if (this.cantidad <= 0){
+			    return alert('Ingrese un numero mayor a cero (0)')
+        }
+				if (this.productoSeleccionado !== null) {
 					// this.productos = await this.productos.filter((item) => item.nombre !== this.productoSeleccionado);
+					await this.productos.forEach((item, index) => {
+						if (item.nombre === this.productoSeleccionado) {
+              console.log(item.precioVenta*this.cantidad)
+						}
+					});
 					this.cantidad = 1;
 					this.productoSeleccionado = null;
 				}
