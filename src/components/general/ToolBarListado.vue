@@ -28,6 +28,7 @@
 			</v-toolbar>
 		</v-card>
 		<v-container>
+			<TablaVentas v-if="index === 3" />
 			<TablaProductos v-if="index === 2" />
 			<TablaClientes v-if="index === 1" />
 		</v-container>
@@ -37,9 +38,10 @@
 <script>
 	import TablaProductos from '../List/TablaProductos';
 	import TablaClientes from '../List/TablaClientes';
+	import TablaVentas from '../List/TablaVentas';
 	export default {
 		name: 'ToolBar',
-		components: { TablaProductos, TablaClientes },
+		components: { TablaProductos, TablaClientes,TablaVentas },
 		data: () => ({
 			tab: null,
 			index: 3,

@@ -4,7 +4,7 @@ import router from '@/router';
 import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
 import {
 	LISTAR_CLIENTES,
-	LISTAR_PRODUCTOS,
+	LISTAR_PRODUCTOS, LISTAR_VENTAS,
 	REGISTRAR_CLIENTE,
 	REGISTRAR_PRODUCTO,
 	REGISTRAR_VENTA,
@@ -148,6 +148,20 @@ export default new Vuex.Store({
 				}
 				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
 				await REGISTRAR_VENTA( venta, usuario);
+			} catch (e) {
+				console.log(e);
+			}
+		},
+		async listadoVentas({ commit, state }, lista) {
+			try {
+				const usuario = this.state.usuario;
+				if (usuario === null) {
+					localStorage.removeItem('usuario');
+					await router.push('/');
+					return alert('Vuelva a iniciar sesion!');
+				}
+				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				await LISTAR_VENTAS(lista, usuario);
 			} catch (e) {
 				console.log(e);
 			}

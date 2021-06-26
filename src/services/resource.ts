@@ -112,3 +112,13 @@ export const REGISTRAR_VENTA = async (
 		return await store.dispatch('setError', resDB.error.message);
 	}
 };
+
+export const LISTAR_VENTAS = async (lista: [], usuario: any) => {
+	const res = await (
+		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
+	).json();
+	for (let id in res) {
+		// @ts-ignore
+		lista.push(res[id]);
+	}
+};
