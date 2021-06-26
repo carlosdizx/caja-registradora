@@ -36,8 +36,18 @@
 		</v-card-text>
 		<v-card-actions>
 			<v-btn @click="submit" color="success">Registrar venta</v-btn>
+			<v-btn text disabled>
+				Total
+				{{ total }}
+				<v-icon>mdi-cash</v-icon>
+			</v-btn>
 		</v-card-actions>
-		{{ comprados }}
+		<v-data-table
+			:headers="columnas"
+			:items="comprados"
+			:items-per-page="5"
+			class="elevation-1"
+		></v-data-table>
 	</v-card>
 </template>
 
@@ -54,6 +64,12 @@
 			comprados: [],
 			cantidad: 1,
 			productoSeleccionado: null,
+			columnas: [
+				{ text: 'Producto', value: 'nombre' },
+				{ text: 'Cantidad', value: 'cantidad' },
+				{ text: 'Subtotal', value: 'subTotal' },
+			],
+			total: 0,
 		}),
 		async mounted() {
 			await this.listadoClientes(this.clientes);
@@ -70,16 +86,17 @@
 				// this.productos = await this.productos.filter((item) => item.nombre !== this.productoSeleccionado);
 				await this.productos.forEach((item, index) => {
 					if (item.nombre === this.productoSeleccionado) {
-						console.log();
+						const subTotal = item.precioVenta * this.cantidad;
+						this.total += subTotal;
 						this.comprados.push({
 							nombre: this.productoSeleccionado,
 							cantidad: this.cantidad,
-							subTotal: item.precioVenta * this.cantidad,
+							subTotal: subTotal,
 						});
+						this.cantidad = 1;
+						this.productoSeleccionado = null;
 					}
 				});
-				this.cantidad = 1;
-				this.productoSeleccionado = null;
 			},
 			submit() {},
 			esNumero(evt) {
