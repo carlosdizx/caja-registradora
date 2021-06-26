@@ -33,14 +33,11 @@
 				<br />
 				<hr />
 			</v-form>
-
-			<!--
-        <ItemVenta :items="productos" />
-      -->
 		</v-card-text>
 		<v-card-actions>
 			<v-btn @click="submit" color="success">Registrar venta</v-btn>
 		</v-card-actions>
+		{{ comprados }}
 	</v-card>
 </template>
 
@@ -65,19 +62,24 @@
 		methods: {
 			...mapActions(['listadoClientes', 'listadoProductos']),
 			async calcularSubtotal() {
-			  if (this.cantidad <= 0){
-			    return alert('Ingrese un numero mayor a cero (0)')
-        }
-				if (this.productoSeleccionado !== null) {
-					// this.productos = await this.productos.filter((item) => item.nombre !== this.productoSeleccionado);
-					await this.productos.forEach((item, index) => {
-						if (item.nombre === this.productoSeleccionado) {
-              console.log(item.precioVenta*this.cantidad)
-						}
-					});
-					this.cantidad = 1;
-					this.productoSeleccionado = null;
+				if (this.cantidad <= 0 || this.productoSeleccionado === null) {
+					return alert(
+						'Verfique los datos,numeros mayores a cero y seleccione un producto'
+					);
 				}
+				// this.productos = await this.productos.filter((item) => item.nombre !== this.productoSeleccionado);
+				await this.productos.forEach((item, index) => {
+					if (item.nombre === this.productoSeleccionado) {
+						console.log();
+						this.comprados.push({
+							nombre: this.productoSeleccionado,
+							cantidad: this.cantidad,
+							subTotal: item.precioVenta * this.cantidad,
+						});
+					}
+				});
+				this.cantidad = 1;
+				this.productoSeleccionado = null;
 			},
 			submit() {},
 			esNumero(evt) {
