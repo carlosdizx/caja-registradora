@@ -13,7 +13,7 @@
 				<v-spacer></v-spacer>
 				<template v-slot:extension>
 					<v-tabs v-model="tab" align-with-title>
-						<v-tabs-slider color="yellow"></v-tabs-slider>
+						<v-tabs-slider color="red"></v-tabs-slider>
 						<v-tab
 							@click="cambiarIndex(index + 1)"
 							v-for="(item, index) in tabs"

@@ -26,7 +26,6 @@ export const REGISTRAR_PRODUCTO = async (
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
 	}
-	console.log(resDB);
 };
 
 //---------------- Cliente ----------------
@@ -57,5 +56,4 @@ export const REGISTRAR_CLIENTE = async (
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
 	}
-	console.log(resDB);
 };

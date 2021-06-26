@@ -9,7 +9,7 @@
 			</v-btn>
 			<template v-slot:extension>
 				<v-tabs v-model="tab" align-with-title>
-					<v-tabs-slider color="yellow"></v-tabs-slider>
+					<v-tabs-slider color="red"></v-tabs-slider>
 					<router-link
 						v-for="item in tabs"
 						:key="item.name"

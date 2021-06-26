@@ -4,7 +4,6 @@
 			Registro cliente
 		</v-card-title>
 		<v-card-text>
-			{{ clienteTemplate }}
 			<v-form @submit.prevent="submit">
 				<v-text-field
 					v-model.number="clienteTemplate.documento"
