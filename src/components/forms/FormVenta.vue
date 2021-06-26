@@ -66,13 +66,7 @@
 			...mapActions(['listadoClientes', 'listadoProductos']),
 			async calcularSubtotal() {
 				if (this.cantidad !== 0 && this.productoSeleccionado !== null) {
-					await this.productos.filter((item) => item !== this.productoSeleccionado);
-					for (let i = 0; i < this.productos.length; i++) {
-						const producto = this.productos[i];
-						if (producto.nombre === this.productoSeleccionado ){
-              return this.productos.splice(i,1);
-            }
-					}
+					// this.productos = await this.productos.filter((item) => item.nombre !== this.productoSeleccionado);
 					this.cantidad = 1;
 					this.productoSeleccionado = null;
 				}
