@@ -154,13 +154,13 @@ export default new Vuex.Store({
 		},
 		async listadoVentas({ commit, state }, lista) {
 			try {
-				const usuario = this.state.usuario;
+				const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				//const usuario = this.state.usuario;
 				if (usuario === null) {
 					localStorage.removeItem('usuario');
 					await router.push('/');
 					return alert('Vuelva a iniciar sesion!');
 				}
-				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
 				await LISTAR_VENTAS(lista, usuario);
 			} catch (e) {
 				console.log(e);

@@ -1,10 +1,8 @@
 <template>
 	<div>
-		<Tabla titulo="Listado de productos" :columnas="columnas" :lista="lista" />
-		{{ lista }}
+		<Tabla titulo="Listado de ventas" :columnas="columnas" :lista="lista" />
 	</div>
 </template>
-
 <script>
 	import Tabla from '../general/Tabla';
 	import { mapActions } from 'vuex';
@@ -17,7 +15,8 @@
 			lista: [],
 			columnas: [
 				{ text: 'Cliente', value: 'cliente' },
-				{ text: 'Items comprados', value: 'compras' },
+				{ text: 'Productos', value: 'productos' },
+				{ text: 'Total', value: 'total' },
 			],
 		}),
 		methods: {

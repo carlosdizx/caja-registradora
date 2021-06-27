@@ -113,12 +113,28 @@ export const REGISTRAR_VENTA = async (
 	}
 };
 
-export const LISTAR_VENTAS = async (lista: [], usuario: any) => {
+export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	const listaTemp = Array<any>();
 	for (let id in res) {
-		// @ts-ignore
-		lista.push(res[id]);
+		listaTemp.push(res[id]);
 	}
+	listaTemp.forEach((item) => {
+		let productos = '';
+		let total = 0;
+		item.compras.forEach((value: any, index: number) => {
+			productos +=
+				value.subTotal +
+				'-' +
+				value.nombre +
+				'(' +
+				value.cantidad +
+				')' +
+				(index + 1 === item.compras.length ? '' : '〰');
+			total += value.subTotal;
+		});
+		lista.push({ cliente: item.cliente, productos: productos, total: total });
+	});
 };
