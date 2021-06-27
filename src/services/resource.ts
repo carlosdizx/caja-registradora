@@ -131,15 +131,17 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 				value.cantidad +
 				')' +
 				value.nombre +
-				(index + 1 === item.compras.length ? '' : ',');
-			subtotales += value.subTotal + (index + 1 === item.compras.length ? '' : ',');
+				(index + 1 === item.compras.length ? '' : ',\n');
+			subtotales +=
+				new Intl.NumberFormat('de-DE').format(value.subTotal) +
+				(index + 1 === item.compras.length ? '' : ',\n');
 			total += value.subTotal;
 		});
 		lista.push({
 			cliente: item.cliente,
 			productos: productos,
 			subtotal: subtotales,
-			total: total,
+			total: new Intl.NumberFormat('de-DE').format(total),
 		});
 	});
 };
