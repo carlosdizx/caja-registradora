@@ -123,18 +123,23 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	}
 	listaTemp.forEach((item) => {
 		let productos = '';
+		let subtotales = '';
 		let total = 0;
 		item.compras.forEach((value: any, index: number) => {
 			productos +=
-				value.subTotal +
-				'-' +
-				value.nombre +
 				'(' +
 				value.cantidad +
 				')' +
-				(index + 1 === item.compras.length ? '' : '〰');
+				value.nombre +
+				(index + 1 === item.compras.length ? '' : ',');
+			subtotales += value.subTotal + (index + 1 === item.compras.length ? '' : ',');
 			total += value.subTotal;
 		});
-		lista.push({ cliente: item.cliente, productos: productos, total: total });
+		lista.push({
+			cliente: item.cliente,
+			productos: productos,
+			subtotal: subtotales,
+			total: total,
+		});
 	});
 };

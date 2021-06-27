@@ -16,6 +16,7 @@
 			columnas: [
 				{ text: 'Cliente', value: 'cliente' },
 				{ text: 'Productos', value: 'productos' },
+				{ text: 'Subtotal', value: 'subtotal' },
 				{ text: 'Total', value: 'total' },
 			],
 		}),
