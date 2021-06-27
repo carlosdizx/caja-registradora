@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-card-title>
-			Registro producto
+			Registro producto {{ productoTemplate.precioVenta | formatNumber }}
 		</v-card-title>
 		<v-card-text>
 			<v-form @submit.prevent="submit">
@@ -10,20 +10,58 @@
 					prepend-icon="mdi-food-variant"
 					label="Nombre"
 				/>
-				<v-text-field
-					v-model.number="productoTemplate.precioCompra"
-					prepend-icon="mdi-cash"
-					@keypress="esNumero($event)"
-					type="number"
-					label="Precio compra"
-				/>
-				<v-text-field
-					v-model.number="productoTemplate.precioVenta"
-					prepend-icon="mdi-cash-plus"
-					@keypress="esNumero($event)"
-					type="number"
-					label="Precio venta"
-				/>
+				<v-row>
+					<v-col cols="8">
+						<v-text-field
+							v-model.number="productoTemplate.precioCompra"
+							prepend-icon="mdi-cash"
+							@keypress="esNumero($event)"
+							type="number"
+							label="Precio compra"
+						/>
+					</v-col>
+					<v-col cols="4">
+						<br />
+						<p>
+							{{
+								(productoTemplate.precioCompra === null
+									? 0
+									: productoTemplate.precioCompra) | toUSD
+							}}
+						</p>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col cols="8">
+						<v-text-field
+							v-model.number="productoTemplate.precioVenta"
+							prepend-icon="mdi-cash-plus"
+							@keypress="esNumero($event)"
+							type="number"
+							label="Precio venta"
+						/>
+					</v-col>
+					<v-col cols="4">
+						<br />
+						<v-btn
+							text
+							:color="
+								productoTemplate.precioCompra === productoTemplate.precioVenta
+									? 'warning'
+									: productoTemplate.precioCompra > productoTemplate.precioVenta
+									? 'red'
+									: 'green'
+							"
+						>
+							{{
+								(productoTemplate.precioVenta === null
+									? 0
+									: productoTemplate.precioVenta) | toUSD
+							}}
+						</v-btn>
+					</v-col>
+				</v-row>
+
 				<v-select
 					v-model="productoTemplate.tipo"
 					prepend-icon="mdi-format-list-bulleted-type"
