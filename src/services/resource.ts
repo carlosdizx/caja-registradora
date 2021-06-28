@@ -1,3 +1,5 @@
+import router from '@/router';
+
 const URL_BASE = 'https://caja-registradora-app-default-rtdb.firebaseio.com/';
 import store from '../store';
 const shortid = require('shortid');
@@ -32,8 +34,11 @@ export const LISTAR_PRODUCTOS = async (lista: [], usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}productos/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error){
+	if (res.error) {
 		console.log(res.error);
+		if (res.error === 'Auth token is expired') {
+			await store.dispatch('loguearUsuarioConToken');
+		}
 		return await store.dispatch('setError', res.error.message);
 	}
 	for (let id in res) {
@@ -76,7 +81,7 @@ export const LISTAR_CLIENTES = async (lista: [], usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error){
+	if (res.error) {
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
 	}
@@ -125,7 +130,7 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error){
+	if (res.error) {
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
 	}

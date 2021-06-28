@@ -19,7 +19,7 @@ export default new Vuex.Store({
 		error: { tipo: '', message: '' },
 	},
 	mutations: {
-		setError(state, payload) {
+		async setError(state, payload) {
 			if (payload === null) {
 				return (state.error = { tipo: '', message: '' });
 			} else if (payload === 'EMAIL_NOT_FOUND') {
@@ -50,25 +50,31 @@ export default new Vuex.Store({
 			} else if (payload === 'Auth token is expired') {
 				state.usuario = null;
 				localStorage.removeItem('usuario');
+				await router.push('/');
 				return (state.error = {
 					tipo: 'token',
 					message: 'Vuelva a iniciar sesion, token expirado!',
 				});
 			}
 		},
+
 		setUsuario(state, payload) {
 			state.usuario = payload;
 		},
 		async comprobarUsuario(state) {
-			let usuario = state.usuario;
-			if (usuario === null) {
-				usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+			if (state.error.tipo === '') {
+				let usuario = state.usuario;
 				if (usuario === null) {
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
+					usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+					if (usuario === null) {
+						await router.push('/');
+						return alert('Vuelva a iniciar sesion!');
+					}
 				}
+				state.usuario = usuario;
+			} else {
+				console.log(state.error);
 			}
-			state.usuario = usuario;
 		},
 	},
 	actions: {
