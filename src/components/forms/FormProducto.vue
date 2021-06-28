@@ -10,6 +10,7 @@
             v-slot="{ errors }"
             name="Nombre del producto"
             rules="required|min:2|max:80"
+            counter
         >
 				<v-text-field
 					v-model="productoTemplate.nombre"
@@ -34,6 +35,7 @@
 							label="Precio compra"
               required
               :error-messages="errors"
+              counter
 						/>
             </validation-provider>
 					</v-col>
@@ -63,6 +65,7 @@
 							label="Precio venta"
               required
               :error-messages="errors"
+              counter
 						/>
             </validation-provider>
 					</v-col>

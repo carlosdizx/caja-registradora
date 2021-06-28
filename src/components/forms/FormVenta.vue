@@ -3,52 +3,74 @@
 		<v-card-title>
 			Registro venta
 		</v-card-title>
-		<v-card-text>
-			<v-form @submit.prevent="submit">
-				<v-select
-					v-model="clienteSeleccionado"
-					label="Seleccione un cliente"
-					:items="clientes"
-					item-text="documento"
-				/>
-				<hr />
-				<v-row>
-					<v-col cols="3">
+		<validation-observer ref="observer" v-slot="{ invalid }">
+			<v-card-text>
+				<v-form @submit.prevent="submit">
+					<validation-provider
+						v-slot="{ errors }"
+						name="Cliente"
+						rules="required|min:5|max:20"
+					>
 						<v-text-field
-							v-model.number="cantidad"
-							type="number"
-							label="cantidad"
-							@keypress="esNumero($event)"
+							v-model="clienteSeleccionado"
+							label="Documento"
+              append-icon="mdi-account-plus"
+              required
+							:error-messages="errors"
+							counter
 						/>
-					</v-col>
-					<v-col cols="9">
+					</validation-provider>
+
+					<validation-provider v-slot="{ errors }" name="Cliente" rules="required">
 						<v-select
-							v-model="productoSeleccionado"
-							label="Producto"
-							:items="productos"
-							item-text="nombre"
+							v-model="clienteSeleccionado"
+							label="Seleccione un cliente"
+							:items="clientes"
+							item-text="documento"
 						/>
-					</v-col>
-				</v-row>
-				<v-btn @click="calcularSubtotal">
-					agregar producto
-					<v-icon>mdi-cart-plus</v-icon>
+					</validation-provider>
+					<hr />
+					<v-row>
+						<v-col cols="3">
+							<v-text-field
+								v-model.number="cantidad"
+								type="number"
+								label="cantidad"
+								@keypress="esNumero($event)"
+							/>
+						</v-col>
+						<v-col cols="9">
+							<v-select
+								v-model="productoSeleccionado"
+								label="Producto"
+								:items="productos"
+								item-text="nombre"
+							/>
+						</v-col>
+					</v-row>
+					<v-btn @click="calcularSubtotal">
+						agregar producto
+						<v-icon>mdi-cart-plus</v-icon>
+					</v-btn>
+					<br />
+					<br />
+					<hr />
+				</v-form>
+			</v-card-text>
+			<v-card-actions>
+				<v-btn
+					:disabled="comprados.length === 0 || invalid"
+					@click="submit"
+					color="success"
+					>Registrar venta</v-btn
+				>
+				<v-btn text disabled>
+					Total
+					{{ total }}
+					<v-icon>mdi-cash</v-icon>
 				</v-btn>
-				<br />
-				<br />
-				<hr />
-			</v-form>
-		</v-card-text>
-		<v-card-actions>
-			<v-btn :disabled="comprados.length === 0" @click="submit" color="success"
-				>Registrar venta</v-btn
-			>
-			<v-btn text disabled>
-				Total
-				{{ total }}
-				<v-icon>mdi-cash</v-icon>
-			</v-btn>
-		</v-card-actions>
+			</v-card-actions>
+		</validation-observer>
 		<v-data-table
 			:headers="columnas"
 			:items="comprados"
@@ -59,11 +81,44 @@
 </template>
 
 <script>
+	import { required, digits, email, max, min } from 'vee-validate/dist/rules';
+	import {
+		extend,
+		ValidationObserver,
+		ValidationProvider,
+		setInteractionMode,
+	} from 'vee-validate';
 	import { ES_NUMERO } from '../../const/funciones';
 	import { mapActions } from 'vuex';
+	setInteractionMode('eager');
+
+	extend('digits', {
+		...digits,
+		message: '{_field_} Se necesita {length} digitos. ({_value_})',
+	});
+
+	extend('required', {
+		...required,
+		message: '{_field_} no puede estar vacio',
+	});
+
+	extend('max', {
+		...max,
+		message: '{_field_} {length} maximo de caracteres',
+	});
+
+	extend('min', {
+		...min,
+		message: '{_field_} => Ingrese mas caracteres, minimo {length} ',
+	});
+
+	extend('email', {
+		...email,
+		message: 'Correo con formato incorrecto',
+	});
 	export default {
 		name: 'FormVenta',
-		components: {},
+		components: { ValidationProvider, ValidationObserver },
 		data: () => ({
 			clientes: [],
 			productos: [],

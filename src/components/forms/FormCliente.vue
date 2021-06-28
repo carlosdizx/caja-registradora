@@ -32,6 +32,7 @@
 							prepend-icon="mdi-account"
 							required
 							:error-messages="errors"
+              counter
 						/>
 					</validation-provider>
 					<validation-provider
@@ -46,6 +47,7 @@
 							prepend-icon="mdi-calendar-range"
 							required
 							:error-messages="errors"
+              counter
 						/>
 					</validation-provider>
 					<validation-provider v-slot="{ errors }" name="Direccion" rules="min:3|max:60">
@@ -54,6 +56,7 @@
 							label="Dirrecion"
 							prepend-icon="mdi-home"
 							:error-messages="errors"
+              counter
 						/>
 					</validation-provider>
 					<validation-provider v-slot="{ errors }" name="Celular" rules="min:6|max:15">
@@ -64,6 +67,7 @@
 							label="Celular"
 							prepend-icon="mdi-phone"
 							:error-messages="errors"
+              counter
 						/>
 					</validation-provider>
 					<validation-provider v-slot="{ errors }" name="Correo" rules="email">
@@ -73,6 +77,7 @@
 							label="Correo"
 							prepend-icon="mdi-email"
 							:error-messages="errors"
+              counter
 						/>
 					</validation-provider>
 				</v-form>
