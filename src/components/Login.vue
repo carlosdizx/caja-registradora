@@ -15,10 +15,10 @@
 					<validation-provider v-slot="{ errors }" name="email" rules="required|email">
 						<v-text-field
 							v-model="email"
-							:error-messages="errors"
 							label="Correo electronico"
 							prepend-icon="mdi-account-circle"
 							required
+              :error-messages="errors"
 						>
 						</v-text-field>
 					</validation-provider>

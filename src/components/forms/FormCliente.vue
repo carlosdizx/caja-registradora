@@ -3,49 +3,84 @@
 		<v-card-title>
 			Registro cliente
 		</v-card-title>
-		<v-card-text>
-			<v-form @submit.prevent="submit">
-				<v-text-field
-					v-model.number="clienteTemplate.documento"
-					type="number"
-					@keypress="esNumero($event)"
-					label="Documento de identidad"
-					prepend-icon="mdi-card-account-details"
-				/>
-				<v-text-field
-					v-model="clienteTemplate.nombres"
-					label="Nombres y apellidos"
-					prepend-icon="mdi-account"
-				/>
-				<v-text-field
-					v-model="clienteTemplate.direccion"
-					label="Dirrecion"
-					prepend-icon="mdi-home"
-				/>
-				<v-text-field
-					v-model.number="clienteTemplate.celular"
-					type="number"
-					@keypress="esNumero($event)"
-					label="Celular"
-					prepend-icon="mdi-phone"
-				/>
-				<v-text-field
-					v-model="clienteTemplate.correo"
-					type="email"
-					label="Correo"
-					prepend-icon="mdi-email"
-				/>
-				<v-text-field
-					v-model="clienteTemplate.fecha"
-					type="date"
-					label="Fecha de nacimiento"
-					prepend-icon="mdi-calendar-range"
-				/>
-			</v-form>
-		</v-card-text>
-		<v-card-actions>
-			<v-btn @click="submit" color="success">Agregar</v-btn>
-		</v-card-actions>
+		<validation-observer ref="observer" v-slot="{ invalid }">
+			<v-card-text>
+				<v-form @submit.prevent="submit">
+					<validation-provider
+						v-slot="{ errors }"
+						name="Documento"
+						rules="required|min:3|max:60"
+					>
+						<v-text-field
+							v-model.number="clienteTemplate.documento"
+							type="number"
+							@keypress="esNumero($event)"
+							label="Documento de identidad"
+							prepend-icon="mdi-card-account-details"
+							required
+							:error-messages="errors"
+						/>
+					</validation-provider>
+					<validation-provider
+						v-slot="{ errors }"
+						name="Nombres y apellidos"
+						rules="required|min:3|max:60"
+					>
+						<v-text-field
+							v-model="clienteTemplate.nombres"
+							label="Nombres y apellidos"
+							prepend-icon="mdi-account"
+							required
+							:error-messages="errors"
+						/>
+					</validation-provider>
+					<validation-provider
+						v-slot="{ errors }"
+						name="Fecha de nacimiento"
+						rules="required"
+					>
+						<v-text-field
+							v-model="clienteTemplate.fecha"
+							type="date"
+							label="Fecha de nacimiento"
+							prepend-icon="mdi-calendar-range"
+							required
+							:error-messages="errors"
+						/>
+					</validation-provider>
+					<validation-provider v-slot="{ errors }" name="Direccion" rules="min:3|max:60">
+						<v-text-field
+							v-model="clienteTemplate.direccion"
+							label="Dirrecion"
+							prepend-icon="mdi-home"
+							:error-messages="errors"
+						/>
+					</validation-provider>
+					<validation-provider v-slot="{ errors }" name="Celular" rules="min:6|max:15">
+						<v-text-field
+							v-model.number="clienteTemplate.celular"
+							type="number"
+							@keypress="esNumero($event)"
+							label="Celular"
+							prepend-icon="mdi-phone"
+							:error-messages="errors"
+						/>
+					</validation-provider>
+					<validation-provider v-slot="{ errors }" name="Correo" rules="email">
+						<v-text-field
+							v-model="clienteTemplate.correo"
+							type="email"
+							label="Correo"
+							prepend-icon="mdi-email"
+							:error-messages="errors"
+						/>
+					</validation-provider>
+				</v-form>
+			</v-card-text>
+			<v-card-actions>
+				<v-btn :disabled="invalid" @click="submit" color="success">Agregar</v-btn>
+			</v-card-actions>
+		</validation-observer>
 	</v-card>
 </template>
 
