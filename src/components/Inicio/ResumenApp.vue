@@ -1,6 +1,13 @@
 <template>
 	<div>
-		<CardResumen titulo="Ventas" subTitulo="Resumen" descripcion="Total ventas registradas" />
+		<CardResumen
+			titulo="Ventas"
+			subTitulo="Resumen"
+			descripcion="Total ventas registradas"
+      color="red"
+      icono="mdi-home"
+      textoBoton="ver Ventas"
+		/>
 	</div>
 </template>
 
