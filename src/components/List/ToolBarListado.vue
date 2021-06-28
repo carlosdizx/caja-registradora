@@ -36,9 +36,9 @@
 </template>
 
 <script>
-	import TablaProductos from '../List/TablaProductos';
-	import TablaClientes from '../List/TablaClientes';
-	import TablaVentas from '../List/TablaVentas';
+	import TablaProductos from './TablaProductos';
+	import TablaClientes from './TablaClientes';
+	import TablaVentas from './TablaVentas';
 	export default {
 		name: 'ToolBar',
 		components: { TablaProductos, TablaClientes,TablaVentas },

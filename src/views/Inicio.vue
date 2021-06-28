@@ -6,7 +6,7 @@
 </template>
 
 <script>
-	import ToolBar from '../components/general/ToolBar';
+	import ToolBar from '../components/Inicio/ToolBarInicio';
 	import { ITEMS } from '../assets/itemsInicio';
 	export default {
 		name: 'Inicio',

@@ -114,7 +114,7 @@
 		message: 'Correo con formato incorrecto',
 	});
 	export default {
-		name: 'RegistroProducto',
+		name: 'FormProducto',
 		components: {
 			ValidationProvider,
 			ValidationObserver,

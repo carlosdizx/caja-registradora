@@ -54,17 +54,16 @@
 			:items="comprados"
 			:items-per-page="5"
 			class="elevation-1"
-		></v-data-table>
+		/>
 	</v-card>
 </template>
 
 <script>
 	import { ES_NUMERO } from '../../const/funciones';
 	import { mapActions } from 'vuex';
-	import ItemVenta from './ItemVenta';
 	export default {
 		name: 'FormVenta',
-		components: { ItemVenta },
+		components: {},
 		data: () => ({
 			clientes: [],
 			productos: [],

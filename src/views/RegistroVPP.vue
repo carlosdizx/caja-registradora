@@ -3,8 +3,8 @@
 </template>
 
 <script>
-	import ToolBarIcons from '../components/general/ToolBarIcons';
-	import RegistroCliente from '../components/forms/RegistroCliente';
+	import ToolBarIcons from '../components/forms/ToolBarRegistro';
+	import RegistroCliente from '../components/forms/FormCliente';
 	export default {
 		name: 'RegistroVPP',
 		components: { ToolBarIcons, RegistroCliente },

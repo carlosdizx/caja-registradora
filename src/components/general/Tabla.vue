@@ -11,11 +11,10 @@
 				lastIcon: 'mdi-arrow-collapse-right',
 				prevIcon: 'mdi-minus',
 				nextIcon: 'mdi-plus',
-				rowsPerPage:'sda'
+				rowsPerPage:'8'
 			}"
 			class="elevation-1"
-		>
-		</v-data-table>
+		/>
 	</v-card>
 </template>
 

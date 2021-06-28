@@ -31,7 +31,7 @@
 	import { mapActions } from 'vuex';
 
 	export default {
-		name: 'ToolBar',
+		name: 'ToolBarInicio',
 		data: () => ({
 			tab: null,
 		}),

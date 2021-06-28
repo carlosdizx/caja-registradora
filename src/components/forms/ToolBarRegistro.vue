@@ -36,11 +36,11 @@
 </template>
 
 <script>
-	import RegistroCliente from '../forms/RegistroCliente';
-	import RegistroProducto from '../forms/RegistroProducto';
-	import FormVenta from '../forms/FormVenta';
+	import RegistroCliente from './FormCliente';
+	import RegistroProducto from './FormProducto';
+	import FormVenta from './FormVenta';
 	export default {
-		name: 'ToolBar',
+		name: 'ToolBarRegistro',
 		components: { RegistroCliente, RegistroProducto, FormVenta },
 		data: () => ({
 			tab: null,

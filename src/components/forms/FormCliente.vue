@@ -86,7 +86,7 @@
 		message: 'Correo con formato incorrecto',
 	});
 	export default {
-		name: 'RegistroCliente',
+		name: 'FormCliente',
 		components: {
 			ValidationProvider,
 			ValidationObserver,
