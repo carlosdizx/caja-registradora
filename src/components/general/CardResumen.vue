@@ -11,7 +11,7 @@
 			</v-list-item-content>
 
 			<v-list-item-avatar :color="color" size="80">
-				<v-icon size="70" dark>{{ icono }}</v-icon>
+				<v-icon size="60" dark>{{ icono }}</v-icon>
 			</v-list-item-avatar>
 		</v-list-item>
 
@@ -30,7 +30,6 @@
 			descripcion: String,
 			color: String,
 			icono: String,
-			textoBoton: String,
 		},
 	};
 </script>

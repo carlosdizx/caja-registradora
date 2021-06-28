@@ -1,14 +1,27 @@
 <template>
-	<div>
+	<v-container>
 		<CardResumen
 			titulo="Ventas"
 			subTitulo="Resumen"
+			color="green"
+			icono="mdi-cash-register"
 			descripcion="Total ventas registradas"
-      color="red"
-      icono="mdi-home"
-      textoBoton="ver Ventas"
 		/>
-	</div>
+    <CardResumen
+        titulo="Clientes"
+        subTitulo="Resumen"
+        color="blue"
+        icono="mdi-account-group"
+        descripcion="Total ventas registradas"
+    />
+    <CardResumen
+        titulo="Prodcutos"
+        subTitulo="Resumen"
+        color="deep-purple"
+        icono="mdi-inbox-multiple"
+        descripcion="Total ventas registradas"
+    />
+	</v-container>
 </template>
 
 <script>
