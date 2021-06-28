@@ -32,6 +32,10 @@ export const LISTAR_PRODUCTOS = async (lista: [], usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}productos/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res.error){
+		console.log(res.error);
+		return await store.dispatch('setError', res.error.message);
+	}
 	for (let id in res) {
 		// @ts-ignore
 		lista.push(res[id]);
@@ -72,6 +76,10 @@ export const LISTAR_CLIENTES = async (lista: [], usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res.error){
+		console.log(res.error);
+		return await store.dispatch('setError', res.error.message);
+	}
 	for (let id in res) {
 		// @ts-ignore
 		lista.push(res[id]);
@@ -117,6 +125,10 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res.error){
+		console.log(res.error);
+		return await store.dispatch('setError', res.error.message);
+	}
 	const listaTemp = Array<any>();
 	for (let id in res) {
 		listaTemp.push(res[id]);

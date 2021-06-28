@@ -4,7 +4,8 @@ import router from '@/router';
 import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/auth';
 import {
 	LISTAR_CLIENTES,
-	LISTAR_PRODUCTOS, LISTAR_VENTAS,
+	LISTAR_PRODUCTOS,
+	LISTAR_VENTAS,
 	REGISTRAR_CLIENTE,
 	REGISTRAR_PRODUCTO,
 	REGISTRAR_VENTA,
@@ -58,6 +59,17 @@ export default new Vuex.Store({
 		setUsuario(state, payload) {
 			state.usuario = payload;
 		},
+		async comprobarUsuario(state) {
+			let usuario = state.usuario;
+			if (usuario === null) {
+				usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				if (usuario === null) {
+					await router.push('/');
+					return alert('Vuelva a iniciar sesion!');
+				}
+			}
+			state.usuario = usuario;
+		},
 	},
 	actions: {
 		async cerrarSesion({ commit }) {
@@ -82,15 +94,11 @@ export default new Vuex.Store({
 		setError({ commit }, error) {
 			commit('setError', error);
 		},
+
 		async registrarProducto({ commit, state }, producto) {
 			try {
-				const usuario = this.state.usuario;
-				if (usuario === null) {
-					localStorage.removeItem('usuario');
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
-				}
-				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				commit('comprobarUsuario');
+				let usuario = state.usuario;
 				await REGISTRAR_PRODUCTO(producto, usuario);
 			} catch (error) {
 				console.log(error);
@@ -98,13 +106,8 @@ export default new Vuex.Store({
 		},
 		async registrarCliente({ commit, state }, cliente) {
 			try {
-				const usuario = this.state.usuario;
-				if (usuario === null) {
-					localStorage.removeItem('usuario');
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
-				}
-				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				commit('comprobarUsuario');
+				let usuario = state.usuario;
 				await REGISTRAR_CLIENTE(cliente, usuario);
 			} catch (e) {
 				console.log(e);
@@ -112,13 +115,8 @@ export default new Vuex.Store({
 		},
 		async listadoProductos({ commit, state }, lista) {
 			try {
-				const usuario = this.state.usuario;
-				if (usuario === null) {
-					localStorage.removeItem('usuario');
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
-				}
-				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				commit('comprobarUsuario');
+				let usuario = this.state.usuario;
 				await LISTAR_PRODUCTOS(lista, usuario);
 			} catch (e) {
 				console.log(e);
@@ -126,13 +124,8 @@ export default new Vuex.Store({
 		},
 		async listadoClientes({ commit, state }, lista) {
 			try {
-				const usuario = this.state.usuario;
-				if (usuario === null) {
-					localStorage.removeItem('usuario');
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
-				}
-				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
+				commit('comprobarUsuario');
+				let usuario = state.usuario;
 				await LISTAR_CLIENTES(lista, usuario);
 			} catch (e) {
 				console.log(e);
@@ -140,27 +133,17 @@ export default new Vuex.Store({
 		},
 		async registrarVenta({ commit, state }, venta) {
 			try {
-				const usuario = this.state.usuario;
-				if (usuario === null) {
-					localStorage.removeItem('usuario');
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
-				}
-				//const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
-				await REGISTRAR_VENTA( venta, usuario);
+				commit('comprobarUsuario');
+				let usuario = state.usuario;
+				await REGISTRAR_VENTA(venta, usuario);
 			} catch (e) {
 				console.log(e);
 			}
 		},
 		async listadoVentas({ commit, state }, lista) {
 			try {
-				const usuario = JSON.parse(<string>localStorage.getItem('usuario'));
-				//const usuario = this.state.usuario;
-				if (usuario === null) {
-					localStorage.removeItem('usuario');
-					await router.push('/');
-					return alert('Vuelva a iniciar sesion!');
-				}
+				commit('comprobarUsuario');
+				let usuario = state.usuario;
 				await LISTAR_VENTAS(lista, usuario);
 			} catch (e) {
 				console.log(e);
