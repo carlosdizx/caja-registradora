@@ -14,10 +14,8 @@
 				<v-icon size="60" dark>{{ icono }}</v-icon>
 			</v-list-item-avatar>
 		</v-list-item>
-
-		<v-card-actions>
-			<v-text-field :label="descripcion" disabled> </v-text-field>
-		</v-card-actions>
+		<v-text-field :label="descripcion" disabled> </v-text-field>
+		<v-text-field :label="auxinfo" disabled> </v-text-field>
 	</v-card>
 </template>
 
@@ -27,9 +25,10 @@
 		props: {
 			titulo: String,
 			subTitulo: String,
-			descripcion: String,
 			color: String,
 			icono: String,
+			descripcion: String,
+			auxinfo: String,
 		},
 	};
 </script>
