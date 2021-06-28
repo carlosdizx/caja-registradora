@@ -30,19 +30,15 @@ export const REGISTRAR_PRODUCTO = async (
 	}
 };
 
-export const LISTAR_PRODUCTOS = async (lista: [], usuario: any) => {
+export const LISTAR_PRODUCTOS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}productos/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
 	if (res.error) {
 		console.log(res.error);
-		if (res.error === 'Auth token is expired') {
-			await store.dispatch('loguearUsuarioConToken');
-		}
 		return await store.dispatch('setError', res.error.message);
 	}
 	for (let id in res) {
-		// @ts-ignore
 		lista.push(res[id]);
 	}
 };
@@ -77,7 +73,7 @@ export const REGISTRAR_CLIENTE = async (
 	}
 };
 
-export const LISTAR_CLIENTES = async (lista: [], usuario: any) => {
+export const LISTAR_CLIENTES = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
@@ -86,7 +82,6 @@ export const LISTAR_CLIENTES = async (lista: [], usuario: any) => {
 		return await store.dispatch('setError', res.error.message);
 	}
 	for (let id in res) {
-		// @ts-ignore
 		lista.push(res[id]);
 	}
 };
