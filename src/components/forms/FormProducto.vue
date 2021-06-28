@@ -1,24 +1,41 @@
 <template>
 	<v-card>
 		<v-card-title>
-			Registro producto {{ productoTemplate.precioVenta | formatNumber }}
+			Registro producto
 		</v-card-title>
+    <validation-observer ref="observer" v-slot="{ invalid }">
 		<v-card-text>
 			<v-form @submit.prevent="submit">
+        <validation-provider
+            v-slot="{ errors }"
+            name="Nombre del producto"
+            rules="required|min:2|max:80"
+        >
 				<v-text-field
 					v-model="productoTemplate.nombre"
 					prepend-icon="mdi-food-variant"
 					label="Nombre"
+          required
+          :error-messages="errors"
 				/>
+        </validation-provider>
 				<v-row>
 					<v-col cols="8">
+            <validation-provider
+                v-slot="{ errors }"
+                name="Precio de compra"
+                rules="required|min:1|max:10"
+            >
 						<v-text-field
 							v-model.number="productoTemplate.precioCompra"
 							prepend-icon="mdi-cash"
 							@keypress="esNumero($event)"
 							type="number"
 							label="Precio compra"
+              required
+              :error-messages="errors"
 						/>
+            </validation-provider>
 					</v-col>
 					<v-col cols="4">
 						<br />
@@ -33,13 +50,21 @@
 				</v-row>
 				<v-row>
 					<v-col cols="8">
+            <validation-provider
+                v-slot="{ errors }"
+                name="Precio de venta"
+                rules="required|min:1|max:11"
+            >
 						<v-text-field
 							v-model.number="productoTemplate.precioVenta"
 							prepend-icon="mdi-cash-plus"
 							@keypress="esNumero($event)"
 							type="number"
 							label="Precio venta"
+              required
+              :error-messages="errors"
 						/>
+            </validation-provider>
 					</v-col>
 					<v-col cols="4">
 						<br />
@@ -62,17 +87,26 @@
 					</v-col>
 				</v-row>
 
+        <validation-provider
+            v-slot="{ errors }"
+            name="Precio de venta"
+            rules="required"
+        >
 				<v-select
 					v-model="productoTemplate.tipo"
 					prepend-icon="mdi-format-list-bulleted-type"
 					:items="tipos"
 					label="Categoria"
+          required
+          :error-messages="errors"
 				/>
+        </validation-provider>
 			</v-form>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn @click="submit" color="success">Agregar</v-btn>
+			<v-btn :disabled="invalid" @click="submit" color="success">Agregar</v-btn>
 		</v-card-actions>
+    </validation-observer>
 	</v-card>
 </template>
 
