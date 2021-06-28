@@ -5,6 +5,7 @@ import { CARGAR_USUARIO, LOGIN_USUARIO, REGISTRAR_USUARIO } from '@/services/aut
 import {
 	LISTAR_CLIENTES,
 	LISTAR_PRODUCTOS,
+	LISTAR_RESUMEN_VENTAS,
 	LISTAR_VENTAS,
 	REGISTRAR_CLIENTE,
 	REGISTRAR_PRODUCTO,
@@ -151,6 +152,15 @@ export default new Vuex.Store({
 				commit('comprobarUsuario');
 				let usuario = state.usuario;
 				await LISTAR_VENTAS(lista, usuario);
+			} catch (e) {
+				console.log(e);
+			}
+		},
+		async listadoResumenVentas({ commit, state }, lista) {
+			try {
+				commit('comprobarUsuario');
+				let usuario = state.usuario;
+				await LISTAR_RESUMEN_VENTAS(lista, usuario);
 			} catch (e) {
 				console.log(e);
 			}

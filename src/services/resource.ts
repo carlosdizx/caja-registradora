@@ -145,7 +145,7 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 				value.nombre +
 				(index + 1 === item.compras.length ? '' : ',\n');
 			subtotales +=
-				new Intl.NumberFormat('de-DE').format(value.subTotal) +
+				new Intl.NumberFormat('es-ES').format(value.subTotal) +
 				(index + 1 === item.compras.length ? '' : ',\n');
 			total += value.subTotal;
 		});
@@ -153,7 +153,32 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 			cliente: item.cliente,
 			productos: productos,
 			subtotal: subtotales,
-			total: new Intl.NumberFormat('de-DE').format(total),
+			total: new Intl.NumberFormat('es-ES').format(total),
+		});
+	});
+};
+
+export const LISTAR_RESUMEN_VENTAS = async (lista: Array<any>, usuario: any) => {
+	const res = await (
+		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
+	).json();
+	if (res.error) {
+		console.log(res.error);
+		return await store.dispatch('setError', res.error.message);
+	}
+	const listaTemp = Array<any>();
+	for (let id in res) {
+		listaTemp.push(res[id]);
+	}
+	listaTemp.forEach((item) => {
+		let subtotales = '';
+		let total = 0;
+		item.compras.forEach((value: any, index: number) => {
+			subtotales += value.subTotal + (index + 1 === item.compras.length ? '' : ',\n');
+			total += value.subTotal;
+		});
+		lista.push({
+			total: total,
 		});
 	});
 };

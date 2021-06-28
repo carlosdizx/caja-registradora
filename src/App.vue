@@ -13,8 +13,12 @@
 	});
 
 	Vue.filter('toUSD', function(value: number) {
-		return `$${value.toLocaleString()}`;
+		return numeral(value).format('$0,0');
 	});
+
+  Vue.filter('toCOP', function(value: number) {
+    return numeral(value).format('$#.#');
+  });
 
 	export default Vue.extend({
 		name: 'App',

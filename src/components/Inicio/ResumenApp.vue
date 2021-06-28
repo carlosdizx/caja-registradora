@@ -6,7 +6,8 @@
 			color="green"
 			icono="mdi-cash-register"
 			:descripcion="'Numero de ventas registradas: ' + ventas.length"
-			:auxinfo="'Total dinero registrado: ' + total"
+			:auxinfo="total"
+			:addaux="true"
 		/>
 		<CardResumen
 			titulo="Clientes"
@@ -43,13 +44,13 @@
 			this.cargarDatos();
 		},
 		methods: {
-			...mapActions(['listadoClientes', 'listadoProductos', 'listadoVentas']),
+			...mapActions(['listadoClientes', 'listadoProductos', 'listadoResumenVentas']),
 			async cargarDatos() {
 				await this.listadoClientes(this.clientes);
 				await this.listadoProductos(this.productos);
-				await this.listadoVentas(this.ventas);
+				await this.listadoResumenVentas(this.ventas);
 				await this.ventas.forEach((item) => {
-					this.total = item.total;
+					this.total += parseFloat(item.total);
 				});
 			},
 		},

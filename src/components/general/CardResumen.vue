@@ -14,8 +14,8 @@
 				<v-icon size="60" dark>{{ icono }}</v-icon>
 			</v-list-item-avatar>
 		</v-list-item>
-		<v-text-field :label="descripcion" disabled> </v-text-field>
-		<v-text-field :label="auxinfo" disabled> </v-text-field>
+		<v-text-field :label="descripcion" disabled></v-text-field>
+		<div v-if="addaux" class="text-overline mb-4">{{ auxinfo |  toUSD }}</div>
 	</v-card>
 </template>
 
@@ -28,7 +28,8 @@
 			color: String,
 			icono: String,
 			descripcion: String,
-			auxinfo: String,
+      addaux: Boolean,
+			auxinfo: Number,
 		},
 	};
 </script>
