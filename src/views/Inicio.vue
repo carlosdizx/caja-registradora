@@ -1,17 +1,18 @@
 <template>
   <div>
     <ToolBar titulo="Inicio" color="indigo" :tabs="tabs" />
-    <h1>Ey pero que pasa chavales!</h1>
+    <ResumenApp />
   </div>
 </template>
 
 <script>
 	import ToolBar from '../components/Inicio/ToolBarInicio';
+	import ResumenApp from "../components/Inicio/ResumenApp";
 	import { ITEMS } from '../assets/itemsInicio';
 	export default {
 		name: 'Inicio',
 		components: {
-			ToolBar,
+			ToolBar,ResumenApp
 		},
 		data: () => ({ tabs: [{ name: '', link: '' }] }),
 		mounted() {
