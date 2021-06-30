@@ -54,7 +54,8 @@
 		}),
 		mounted() {
 			this.tabs = ITEMS;
-			console.log(new Date());
+			//console.log(new Date().toDateString());
+			//console.log(new Date());
 		},
 	};
 </script>

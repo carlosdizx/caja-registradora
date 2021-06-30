@@ -24,10 +24,10 @@ export const REGISTRAR_PRODUCTO = async (
 		}
 	);
 	const resDB = await res.json();
-	if (resDB === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (resDB.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (resDB.error) {
 		console.log(resDB.error);
@@ -39,10 +39,10 @@ export const LISTAR_PRODUCTOS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}productos/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (res.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (res.error) {
 		console.log(res.error);
@@ -77,10 +77,10 @@ export const REGISTRAR_CLIENTE = async (
 		}
 	);
 	const resDB = await res.json();
-	if (resDB === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (resDB.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (resDB.error) {
 		console.log(resDB.error);
@@ -92,10 +92,10 @@ export const LISTAR_CLIENTES = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (res.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (res.error) {
 		console.log(res.error);
@@ -118,6 +118,7 @@ export const REGISTRAR_VENTA = async (
 			fecha: number;
 		};
 		facturas: Array<any>;
+		fecha: string;
 	},
 	usuario: any
 ) => {
@@ -135,10 +136,10 @@ export const REGISTRAR_VENTA = async (
 		}
 	);
 	const resDB = await res.json();
-	if (resDB === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (resDB.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (resDB.error) {
 		console.log(resDB.error);
@@ -150,10 +151,10 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (res.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (res.error) {
 		console.log(res.error);
@@ -192,10 +193,10 @@ export const LISTAR_RESUMEN_VENTAS = async (lista: Array<any>, usuario: any) => 
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res === 'Auth token is expired') {
-		localStorage.removeItem('usuario');
-		alert('Vuelva a iniciar sesion!');
-		return await store.dispatch('setUsuario', null);
+	if (res.error === 'Auth token is expired') {
+		await localStorage.removeItem('usuario');
+		await store.dispatch('setUsuario', null);
+		return alert('Vuelva a iniciar sesion!');
 	}
 	if (res.error) {
 		console.log(res.error);

@@ -14,8 +14,8 @@
 						<v-text-field
 							v-model="clienteSeleccionado"
 							label="Documento"
-              append-icon="mdi-account-plus"
-              required
+							append-icon="mdi-account-plus"
+							required
 							:error-messages="errors"
 							counter
 						/>
@@ -164,7 +164,12 @@
 				if (this.clienteSeleccionado === null) {
 					return alert('Seleccione un cliente');
 				}
-				const venta = { cliente: this.clienteSeleccionado, compras: this.comprados };
+
+				const venta = {
+					cliente: this.clienteSeleccionado,
+					compras: this.comprados,
+					fecha: new Date().toDateString(),
+				};
 				await this.registrarVenta(venta);
 				this.clienteSeleccionado = null;
 				this.comprados = [];
