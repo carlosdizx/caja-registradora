@@ -27,16 +27,19 @@
 				</template>
 			</v-toolbar>
 		</v-card>
-		<v-container>
-
-    </v-container>
+    <div class="container">
+      <v-container>
+        <GraficaProductos v-if="index===2" />
+      </v-container>
+    </div>
 	</div>
 </template>
 
 <script>
+import GraficaProductos from "./GraficaProductos";
 	export default {
 		name: 'ToolBar',
-		components: {},
+		components: {GraficaProductos},
 		data: () => ({
 			tab: null,
 			index: 3,

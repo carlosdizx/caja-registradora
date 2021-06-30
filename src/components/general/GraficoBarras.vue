@@ -5,10 +5,23 @@
 		name: 'GraficoBarras',
 		data: () => ({
 			dataSets: [],
+      colores: [
+        'green',
+        'blue',
+        'red',
+        'yellow',
+        'pink',
+        'cyan',
+        'indigo',
+        'orange',
+        'purple',
+        'brown',
+        'olive',
+        'dark',
+      ]
 		}),
 		props: {
 			etiquetas: [],
-			colores: [],
 			datos: [],
 		},
 		methods: {
