@@ -18,7 +18,7 @@
 						custom
 					>
 						<v-tab @click="navigate">
-							{{ item.name }}
+							<v-icon>{{ item.name }}</v-icon>
 						</v-tab>
 					</router-link>
 				</v-tabs>

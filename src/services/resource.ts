@@ -24,12 +24,12 @@ export const REGISTRAR_PRODUCTO = async (
 		}
 	);
 	const resDB = await res.json();
-	if (resDB.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (resDB.error) {
+		if (resDB.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
 	}
@@ -39,12 +39,12 @@ export const LISTAR_PRODUCTOS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}productos/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (res.error) {
+		if (res.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
 	}
@@ -77,12 +77,12 @@ export const REGISTRAR_CLIENTE = async (
 		}
 	);
 	const resDB = await res.json();
-	if (resDB.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (resDB.error) {
+		if (resDB.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
 	}
@@ -92,12 +92,12 @@ export const LISTAR_CLIENTES = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (res.error) {
+		if (res.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
 	}
@@ -136,12 +136,12 @@ export const REGISTRAR_VENTA = async (
 		}
 	);
 	const resDB = await res.json();
-	if (resDB.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (resDB.error) {
+		if (resDB.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
 	}
@@ -151,12 +151,12 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (res.error) {
+		if (res.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
 	}
@@ -193,12 +193,12 @@ export const LISTAR_RESUMEN_VENTAS = async (lista: Array<any>, usuario: any) => 
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
-	if (res.error === 'Auth token is expired') {
-		await localStorage.removeItem('usuario');
-		await store.dispatch('setUsuario', null);
-		return alert('Vuelva a iniciar sesion!');
-	}
 	if (res.error) {
+		if (res.error === 'Auth token is expired') {
+			await localStorage.removeItem('usuario');
+			await store.dispatch('setUsuario', null);
+			return alert('Vuelva a iniciar sesion!');
+		}
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
 	}

@@ -1,6 +1,6 @@
 export const ITEMS = [
-	{ name: 'Graficos', link: '/graficos' },
-	{ name: 'Listados', link: '/listado' },
-	{ name: 'Registrar', link: '/registrovpp' },
-	{ name: 'Home', link: '/inicio' },
+	{ name: 'mdi-google-analytics', link: '/graficos' },
+	{ name: 'mdi-table-large', link: '/listado' },
+	{ name: 'mdi-plus-circle-outline', link: '/registrovpp' },
+	{ name: 'mdi-home', link: '/inicio' },
 ];

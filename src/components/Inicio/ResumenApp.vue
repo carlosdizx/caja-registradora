@@ -49,9 +49,10 @@
 				await this.listadoClientes(this.clientes);
 				await this.listadoProductos(this.productos);
 				await this.listadoResumenVentas(this.ventas);
-				await this.ventas.forEach((item) => {
-					this.total += parseFloat(item.total);
-				});
+				if (this.ventas.length !== 0)
+					await this.ventas.forEach((item) => {
+						this.total += parseFloat(item.total);
+					});
 			},
 		},
 	};
