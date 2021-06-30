@@ -2,7 +2,9 @@
 	<div>
 		<ToolBar titulo="Inicio" color="indigo" :tabs="tabs" />
 		<ResumenApp />
-		<Grafico :etiquetas="etiquetas" :datos="datos" :colores="colores" />
+		<!--
+    <Grafico :etiquetas="etiquetas" :datos="datos" :colores="colores" />
+    -->
 	</div>
 </template>
 
@@ -52,6 +54,7 @@
 		}),
 		mounted() {
 			this.tabs = ITEMS;
+			console.log(new Date());
 		},
 	};
 </script>

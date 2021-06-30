@@ -24,6 +24,11 @@ export const REGISTRAR_PRODUCTO = async (
 		}
 	);
 	const resDB = await res.json();
+	if (resDB === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (resDB.error) {
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
@@ -34,6 +39,11 @@ export const LISTAR_PRODUCTOS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}productos/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (res.error) {
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
@@ -67,6 +77,11 @@ export const REGISTRAR_CLIENTE = async (
 		}
 	);
 	const resDB = await res.json();
+	if (resDB === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (resDB.error) {
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
@@ -77,6 +92,11 @@ export const LISTAR_CLIENTES = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}clientes/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (res.error) {
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
@@ -115,6 +135,11 @@ export const REGISTRAR_VENTA = async (
 		}
 	);
 	const resDB = await res.json();
+	if (resDB === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (resDB.error) {
 		console.log(resDB.error);
 		return await store.dispatch('setError', resDB.error.message);
@@ -125,6 +150,11 @@ export const LISTAR_VENTAS = async (lista: Array<any>, usuario: any) => {
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (res.error) {
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);
@@ -162,6 +192,11 @@ export const LISTAR_RESUMEN_VENTAS = async (lista: Array<any>, usuario: any) => 
 	const res = await (
 		await fetch(`${URL_BASE}ventas/${usuario.localId}/.json?auth=${usuario.idToken}`)
 	).json();
+	if (res === 'Auth token is expired') {
+		localStorage.removeItem('usuario');
+		alert('Vuelva a iniciar sesion!');
+		return await store.dispatch('setUsuario', null);
+	}
 	if (res.error) {
 		console.log(res.error);
 		return await store.dispatch('setError', res.error.message);

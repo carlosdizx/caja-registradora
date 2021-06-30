@@ -18,6 +18,11 @@ export const REGISTRAR_USUARIO = async (usuario: { email: string; password: stri
 				}),
 			})
 		).json();
+		if (res === 'Auth token is expired') {
+			localStorage.removeItem('usuario');
+			alert('Vuelva a iniciar sesion!');
+			return await store.dispatch('setUsuario', null);
+		}
 		if (res.error) {
 			console.log(res.error);
 			return store.dispatch('setError', res.error.message);
@@ -43,6 +48,11 @@ export const LOGIN_USUARIO = async (usuario: { email: string; password: string }
 				}),
 			})
 		).json();
+		if (res === 'Auth token is expired') {
+			localStorage.removeItem('usuario');
+			alert('Vuelva a iniciar sesion!');
+			return await store.dispatch('setUsuario', null);
+		}
 		if (res.error) {
 			console.log(res.error);
 			return store.dispatch('setError', res.error.message);
@@ -73,6 +83,11 @@ export const CARGAR_USUARIO = async () => {
 				}),
 			})
 		).json();
+		if (res === 'Auth token is expired') {
+			localStorage.removeItem('usuario');
+			alert('Vuelva a iniciar sesion!');
+			return await store.dispatch('setUsuario', null);
+		}
 		if (res.error) {
 			console.log(res.error);
 			alert('Vuelva a iniciar sesion!');
