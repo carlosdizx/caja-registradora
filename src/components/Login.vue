@@ -18,7 +18,7 @@
 							label="Correo electronico"
 							prepend-icon="mdi-account-circle"
 							required
-              :error-messages="errors"
+							:error-messages="errors"
 						>
 						</v-text-field>
 					</validation-provider>
@@ -34,7 +34,7 @@
 							:error-messages="errors"
 							name="input-10-1"
 							counter
-              current-password
+							current-password
 							prepend-icon="mdi-lock"
 							:type="showPassword ? 'text' : 'password'"
 							:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -48,7 +48,7 @@
 				</v-btn>
 				<router-link to="/registroLogin" v-slot="{ navigate }" custom>
 					<v-btn @click="navigate" @keypress.enter="navigate" role="link" color="success">
-						Registrarme
+						No tengo cuenta
 					</v-btn>
 				</router-link>
 			</validation-observer>
