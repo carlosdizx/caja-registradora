@@ -33,7 +33,7 @@
 						data: [this.datos[index]],
 					});
 				});
-				this.renderChart({
+				await this.renderChart({
 					datasets: this.dataSets,
 				});
 			},

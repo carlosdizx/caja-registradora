@@ -27,22 +27,24 @@
 				</template>
 			</v-toolbar>
 		</v-card>
-    <div class="container">
-      <v-container>
-        <GraficaProductos v-if="index===2" />
-      </v-container>
-    </div>
+		<div class="container">
+			<v-container>
+				<GraficaProductos v-if="index === 1" />
+			</v-container>
+		</div>
 	</div>
 </template>
 
 <script>
-import GraficaProductos from "./GraficaProductos";
+	import GraficaProductos from './GraficaProductos';
+	import { mapActions } from 'vuex';
 	export default {
 		name: 'ToolBar',
-		components: {GraficaProductos},
+		components: { GraficaProductos },
 		data: () => ({
 			tab: null,
-			index: 3,
+			index: 1,
+			productos: [],
 		}),
 		props: {
 			tabs: null,
