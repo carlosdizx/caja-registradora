@@ -3,7 +3,7 @@
 </template>
 
 <script>
-	import ToolBarListado from '../components/List/ToolBarListado';
+	import ToolBarListado from '../components/listado/ToolBarListado';
 	export default {
 		name: 'Listado',
 		components: {

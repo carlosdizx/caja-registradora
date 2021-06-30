@@ -29,6 +29,11 @@ const routes: Array<RouteConfig> = [
 		name: 'Listado',
 		component: () => import('../views/Listado.vue'),
 	},
+	{
+		path: '/graficos',
+		name: 'Graficos',
+		component: () => import('../views/Graficos.vue'),
+	},
 ];
 
 const router = new VueRouter({

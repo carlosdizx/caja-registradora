@@ -3,7 +3,7 @@
 		<ToolBar titulo="Inicio" color="indigo" :tabs="tabs" />
 		<ResumenApp />
 		<!--
-    <Grafico :etiquetas="etiquetas" :datos="datos" :colores="colores" />
+    <grafico :etiquetas="etiquetas" :datos="datos" :colores="colores" />
     -->
 	</div>
 </template>
@@ -12,7 +12,7 @@
 	import ToolBar from '../components/Inicio/ToolBarInicio';
 	import ResumenApp from '../components/Inicio/ResumenApp';
 	import Grafico from '../components/general/GraficoBarras';
-	import { ITEMS } from '../assets/itemsInicio';
+	import { ITEMS } from '../const/itemsInicio';
 	export default {
 		name: 'Inicio',
 		components: {
